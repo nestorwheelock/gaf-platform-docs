@@ -1,8 +1,8 @@
 // GAF Background Slideshow — 20 photos, crossfade, adventure + photo credit sync
 (function () {
     const slides = [
-        { image: '../assets/images/torrey-pines-coast-group.jpg',  adventure: 'Torrey Pines Coastal Hike',     name: 'Alex M.',    profile: 'profile-alex.html' },
         { image: '../assets/images/green-hills-hiking.jpg',        adventure: 'Green Valley Trail Run',         name: 'Ryan T.',    profile: 'profile-ryan.html' },
+        { image: '../assets/images/torrey-pines-coast-group.jpg',  adventure: 'Torrey Pines Coastal Hike',     name: 'Alex M.',    profile: 'profile-alex.html' },
         { image: '../assets/images/whale-watching.jpg',            adventure: 'Whale Watching, La Paz',         name: 'David R.',   profile: 'profile-david.html' },
         { image: '../assets/images/mazatlan-rooftop.jpg',          adventure: 'Mazatlan Rooftop Social',        name: 'Miguel S.',  profile: 'profile-miguel.html' },
         { image: '../assets/images/boulder-hike-group.jpg',        adventure: 'Boulder Field Summit Hike',      name: 'Carlos M.',  profile: 'profile-carlos.html' },
