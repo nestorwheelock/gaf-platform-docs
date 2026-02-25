@@ -417,11 +417,16 @@ footer {
 
 /* ─── BG REVEAL (scroll past footer to see the photo) ─── */
 .bg-reveal {
-    height: 70vh;
+    min-height: 100vh;
     display: flex;
     align-items: flex-end;
     justify-content: center;
     padding-bottom: 3rem;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .bg-reveal { min-height: 70vh; }
 }
 .photo-credit {
     color: rgba(255, 255, 255, 0.75);
