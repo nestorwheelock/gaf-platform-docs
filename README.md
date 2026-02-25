@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/gaf-logo.png" alt="GAF Logo" width="160">
+</p>
+
 # Gay Adventure Friends — Platform Documentation
 
 **Friends Make Life Better**
