@@ -14,28 +14,35 @@ Gay Adventure Friends is a community platform serving 5,700+ members across Sout
 
 This is the **public documentation** for the GAF platform. It describes the system architecture, database design, API contract, feature set, and migration plan. No source code is included.
 
-## Tech Stack
+## How It's Built
 
-| Layer | Technology | Why |
-|-------|-----------|-----|
-| Language | Rust | Memory safety, performance, compile-time guarantees |
-| Web Framework | Axum | Async, composable middleware, tower ecosystem |
-| Database | PostgreSQL | JSONB for flexible metadata, GIN indexes for search, row-level locking for capacity |
-| Templates | Server-side rendered HTML | No SPA complexity, eliminates entire classes of XSS, fast first paint |
-| Styling | Tailwind CSS | Utility-first, small bundle, consistent design system |
-| Auth | Facebook OAuth + email/password | Matches existing community login flow |
-| Payments | Stripe | Subscriptions, one-time donations, webhook-driven |
+This is **rapid development with Rust**.
 
-## Platform Status
+The platform is assembled from a library of **Rust primitive crates** — reusable, test-driven components I built for database-driven systems, originally for tourism and hospitality software in Mexico. Each crate handles one domain: authentication, multi-tenancy, party/membership modeling, encounter scheduling, billing, messaging, content management, audit logging. Each ships with its own unit test suite and PostgreSQL migrations.
 
-| Phase | Description | Status |
-|-------|-------------|--------|
-| Phase 1 | Foundation — Auth, classifieds, moderation, audit | Complete |
-| Phase 2 | Communication — Messaging, notifications | Complete |
-| Phase 3 | Events + Security — Calendar, RSVP, security audit | Complete |
-| Phase 4 | Frontend — SSR pages, admin dashboard, 32 HTML mockups | Complete |
-| Phase 5 | WordPress Migration — Theme, CMS, encounters, billing, waivers | In Progress |
-| Phase 6 | Polish — Real-time, accessibility, SEO, performance | Planned |
+Building a new platform means wiring these components together and writing the domain-specific logic on top. GAF needed adventure types, liability waivers, RSVP capacity management, and a WordPress migration path — that's the custom layer. Everything underneath it already existed and was already tested.
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Rust |
+| Domain Models | Rust Primitives — auth, tenancy, parties, encounters, billing, messaging, CMS, audit |
+| Web Framework | Axum |
+| Database | PostgreSQL |
+| Templates | Server-side rendered HTML |
+| Styling | Tailwind CSS |
+| Auth | Facebook OAuth + email/password |
+| Payments | Stripe |
+
+## Development Phases
+
+| Phase | Description |
+|-------|-------------|
+| Phase 1 | Foundation — Auth, classifieds, moderation, audit |
+| Phase 2 | Communication — Messaging, notifications |
+| Phase 3 | Events + Security — Calendar, RSVP, security audit |
+| Phase 4 | Frontend — SSR pages, admin dashboard, 30 interactive mockups |
+| Phase 5 | WordPress Migration — Theme, CMS, encounters, billing, waivers |
+| Phase 6 | Polish — Real-time, accessibility, SEO, performance |
 
 ## Documentation
 
