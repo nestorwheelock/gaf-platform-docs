@@ -26,6 +26,15 @@
     const SLIDE_DURATION = 7; // seconds per slide
     const totalDuration = slides.length * SLIDE_DURATION;
 
+    // Per-page starting slide — pages set window.gafStartSlide before loading this script
+    var startIndex = window.gafStartSlide || 0;
+    if (startIndex > 0 && startIndex < slides.length) {
+        var rotated = slides.splice(startIndex);
+        rotated.push.apply(rotated, slides.splice(0));
+        slides.length = 0;
+        rotated.forEach(function (s) { slides.push(s); });
+    }
+
     // Build slideshow DOM
     const container = document.querySelector('.bg-slideshow');
     if (!container) return;
