@@ -51,6 +51,16 @@ This is the **public documentation** for the GAF platform. It describes the syst
 | [Migration](docs/MIGRATION.md) | WordPress to GAF transition plan |
 | [Roadmap](docs/ROADMAP.md) | Phase timeline with completion status |
 
+## Interactive Mockups
+
+Open these HTML files in a browser to see the design system in action — real colors, frosted glass, adventure photo backgrounds:
+
+- **[Home Page](mockups/home.html)** — Hero, upcoming events, member testimonials
+- **[Listings](mockups/listings.html)** — Category tabs, search, classified cards
+- **[Member Profile](mockups/member.html)** — Profile, membership card, RSVPs, activity feed
+
+All three share `gaf-theme.css` — the same design tokens that will become Tailwind config in production.
+
 ## Key Numbers
 
 - **5,700+** community members

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Classifieds — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        body {
+            background-image: url('https://gayadventurefriends.com/wp-content/uploads/2024/07/Kayak-Santa-Cruz-Is-web1_5916.jpg');
+        }
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+        .search-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+        .search-bar input { flex: 1; min-width: 200px; }
+        .category-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .tab {
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            border: 1px solid var(--earth-light);
+            background: #fff;
+            color: var(--driftwood);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .tab:hover { border-color: var(--primary); color: var(--primary); }
+        .tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .listing-card { position: relative; }
+        .listing-card .featured-ribbon {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .listing-title { font-size: 1rem; font-weight: 600; color: var(--driftwood); margin-bottom: 0.25rem; }
+        .listing-excerpt { font-size: 0.8125rem; color: var(--granite); line-height: 1.5; margin-bottom: 0.75rem; }
+        .listing-footer { display: flex; justify-content: space-between; align-items: center; }
+        .listing-meta { font-size: 0.75rem; color: var(--granite); }
+        .listing-price { font-size: 0.9375rem; font-weight: 700; color: var(--primary); }
+        .placeholder-img {
+            width: 100%;
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .img-housing { background: linear-gradient(135deg, var(--sky-light), var(--primary-light)); }
+        .img-services { background: linear-gradient(135deg, var(--trail-light), var(--trail)); }
+        .img-jobs { background: linear-gradient(135deg, var(--accent-light), var(--accent)); }
+        .img-roommate { background: linear-gradient(135deg, var(--secondary-light), var(--secondary)); }
+        .img-forsale { background: linear-gradient(135deg, var(--earth-light), var(--earth)); }
+        .pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 1.5rem; }
+        .page-btn {
+            padding: 0.5rem 0.875rem;
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            border: 1px solid var(--earth-light);
+            background: #fff;
+            color: var(--driftwood);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .page-btn:hover:not(.active) { border-color: var(--primary); }
+        .results-count { font-size: 0.8125rem; color: var(--granite); margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.png" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#" class="active">Listings</a>
+                <a href="#">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="glass">
+            <h2 class="section-title">Community Classifieds</h2>
+
+            <div class="search-bar mb-3">
+                <input type="search" placeholder="Search listings...">
+                <button class="btn btn-primary btn-sm">Search</button>
+            </div>
+
+            <div class="category-tabs">
+                <a href="#" class="tab active">All</a>
+                <a href="#" class="tab">Housing</a>
+                <a href="#" class="tab">Jobs</a>
+                <a href="#" class="tab">Roommates</a>
+                <a href="#" class="tab">Services</a>
+                <a href="#" class="tab">For Sale</a>
+            </div>
+
+            <div class="results-count">Showing 47 listings</div>
+
+            <div class="grid grid-3">
+                <div class="card listing-card">
+                    <div class="placeholder-img img-housing">🏠</div>
+                    <div class="card-body">
+                        <span class="badge badge-info mb-1">Housing</span>
+                        <span class="featured-ribbon">Featured</span>
+                        <h4 class="listing-title">Spacious 1BR in Hillcrest</h4>
+                        <p class="listing-excerpt">Bright, updated apartment on University Ave. Walk to everything. In-unit laundry, one parking spot. LGBTQ+ friendly building.</p>
+                        <div class="listing-footer">
+                            <span class="listing-price">$1,850/mo</span>
+                            <span class="listing-meta">2 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card listing-card">
+                    <div class="placeholder-img img-services">🐕</div>
+                    <div class="card-body">
+                        <span class="badge badge-primary mb-1">Services</span>
+                        <h4 class="listing-title">Experienced Dog Walker</h4>
+                        <p class="listing-excerpt">Insured and bonded. Available weekdays in North Park, Hillcrest, and University Heights. References available from GAF members.</p>
+                        <div class="listing-footer">
+                            <span class="listing-price">$25/walk</span>
+                            <span class="listing-meta">5 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card listing-card">
+                    <div class="placeholder-img img-jobs">💻</div>
+                    <div class="card-body">
+                        <span class="badge badge-earth mb-1">Jobs</span>
+                        <h4 class="listing-title">Senior Frontend Developer</h4>
+                        <p class="listing-excerpt">Remote-friendly. React + TypeScript. Inclusive startup building health tech. Competitive salary and equity.</p>
+                        <div class="listing-footer">
+                            <span class="listing-price">$140-170k</span>
+                            <span class="listing-meta">1 week ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card listing-card">
+                    <div class="placeholder-img img-roommate">🏡</div>
+                    <div class="card-body">
+                        <span class="badge badge-warning mb-1">Roommates</span>
+                        <h4 class="listing-title">Room Available in North Park</h4>
+                        <p class="listing-excerpt">Looking for a chill, clean roommate. 2BR/2BA house with yard. $1,200 + utilities. Available April 1.</p>
+                        <div class="listing-footer">
+                            <span class="listing-price">$1,200/mo</span>
+                            <span class="listing-meta">3 days ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card listing-card">
+                    <div class="placeholder-img img-forsale">🏄</div>
+                    <div class="card-body">
+                        <span class="badge badge-danger mb-1">For Sale</span>
+                        <h4 class="listing-title">Inflatable Paddleboard — Like New</h4>
+                        <p class="listing-excerpt">Used twice. Includes pump, paddle, carry bag. Originally $400. Pickup in Ocean Beach.</p>
+                        <div class="listing-footer">
+                            <span class="listing-price">$220</span>
+                            <span class="listing-meta">1 day ago</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card listing-card">
+                    <div class="placeholder-img img-housing">🏢</div>
+                    <div class="card-body">
+                        <span class="badge badge-info mb-1">Housing</span>
+                        <h4 class="listing-title">WeHo Studio — Sublease</h4>
+                        <p class="listing-excerpt">Furnished studio on Santa Monica Blvd. June through September. Great for someone relocating to LA.</p>
+                        <div class="listing-footer">
+                            <span class="listing-price">$1,600/mo</span>
+                            <span class="listing-meta">4 days ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <a href="#" class="page-btn">&larr; Prev</a>
+                <a href="#" class="page-btn active">1</a>
+                <a href="#" class="page-btn">2</a>
+                <a href="#" class="page-btn">3</a>
+                <a href="#" class="page-btn">4</a>
+                <a href="#" class="page-btn">Next &rarr;</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal">
+        <div class="photo-credit">Photo: Kayaking, Channel Islands &middot; Gay Adventure Friends 2024</div>
+    </div>
+</body>
+</html>

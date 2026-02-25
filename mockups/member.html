@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        body {
+            background-image: url('https://gayadventurefriends.com/wp-content/uploads/2024/02/Glacier-Point-Yosemite-Group-sm_8061.jpg');
+        }
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+        .profile-header { display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap; }
+        .profile-info { flex: 1; min-width: 200px; }
+        .profile-name { font-size: 1.75rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.25rem; }
+        .profile-role { margin-bottom: 0.75rem; }
+        .profile-detail { font-size: 0.875rem; color: var(--granite); line-height: 1.8; }
+        .profile-detail strong { color: var(--driftwood); }
+        .profile-actions { display: flex; gap: 0.75rem; margin-top: 1rem; flex-wrap: wrap; }
+        .membership-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #fff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .membership-card h4 { color: var(--accent); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+        .membership-tier { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem; }
+        .membership-detail { font-size: 0.8125rem; opacity: 0.8; margin-bottom: 0.25rem; }
+        .membership-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary-dark);
+            font-size: 0.6875rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            margin-top: 0.75rem;
+        }
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--earth-light);
+            align-items: flex-start;
+        }
+        .activity-item:last-child { border-bottom: none; }
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .icon-event { background: var(--info-bg); }
+        .icon-listing { background: var(--success-bg); }
+        .icon-message { background: #f3e8ff; }
+        .activity-content { flex: 1; }
+        .activity-title { font-size: 0.875rem; font-weight: 500; color: var(--driftwood); margin-bottom: 0.125rem; }
+        .activity-time { font-size: 0.75rem; color: var(--granite); }
+        .event-upcoming { display: flex; gap: 1rem; padding: 0.875rem; background: #fff; border-radius: 0.5rem; border: 1px solid var(--earth-light); align-items: center; }
+        .event-date {
+            width: 50px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .event-date .month { font-size: 0.6875rem; text-transform: uppercase; font-weight: 600; color: var(--secondary); letter-spacing: 0.05em; }
+        .event-date .day { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); line-height: 1; }
+        .event-detail { flex: 1; }
+        .event-detail h4 { font-size: 0.875rem; margin-bottom: 0.125rem; }
+        .event-detail p { font-size: 0.75rem; color: var(--granite); }
+        .my-listing {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--earth-light);
+            align-items: center;
+            justify-content: space-between;
+        }
+        .my-listing-info h4 { font-size: 0.9375rem; margin-bottom: 0.25rem; }
+        .my-listing-info p { font-size: 0.75rem; color: var(--granite); }
+        .my-listing-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+        .two-col { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: start; }
+        @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.png" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="#">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="#">Messages</a>
+                <a href="#" class="active">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="glass">
+            <div class="profile-header mb-3">
+                <div class="avatar avatar-xl">JM</div>
+                <div class="profile-info">
+                    <div class="profile-name">Jeffrey Martinez</div>
+                    <div class="profile-role">
+                        <span class="badge badge-success">Active Member</span>
+                        <span class="badge badge-info" style="margin-left: 0.25rem;">Admin</span>
+                    </div>
+                    <div class="profile-detail">
+                        <strong>Email:</strong> jeffrey@example.com<br>
+                        <strong>Phone:</strong> (619) 555-0142<br>
+                        <strong>Member since:</strong> March 2015<br>
+                        <strong>Adventures attended:</strong> 87
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-primary btn-sm">Edit Profile</button>
+                        <button class="btn btn-secondary-outline btn-sm">Notification Settings</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div>
+                <div class="membership-card">
+                    <h4>Membership</h4>
+                    <div class="membership-tier">Gold Star</div>
+                    <div class="membership-detail">$180 / year</div>
+                    <div class="membership-detail">Renews: March 15, 2026</div>
+                    <div class="membership-badge">All Events &middot; First Access &middot; Exclusives</div>
+                </div>
+
+                <div class="glass">
+                    <h3 class="section-title" style="font-size:1.125rem;">My RSVPs</h3>
+                    <div class="flex" style="flex-direction:column; gap:0.75rem;">
+                        <div class="event-upcoming">
+                            <div class="event-date">
+                                <div class="month">Mar</div>
+                                <div class="day">15</div>
+                            </div>
+                            <div class="event-detail">
+                                <h4>Sunset Cliffs Hike</h4>
+                                <p>8:00 AM &middot; San Diego</p>
+                            </div>
+                            <span class="badge badge-success">Confirmed</span>
+                        </div>
+                        <div class="event-upcoming">
+                            <div class="event-date">
+                                <div class="month">Mar</div>
+                                <div class="day">22</div>
+                            </div>
+                            <div class="event-detail">
+                                <h4>Channel Islands Kayak</h4>
+                                <p>7:00 AM &middot; Ventura</p>
+                            </div>
+                            <span class="badge badge-success">Confirmed</span>
+                        </div>
+                        <div class="event-upcoming">
+                            <div class="event-date">
+                                <div class="month">Apr</div>
+                                <div class="day">5</div>
+                            </div>
+                            <div class="event-detail">
+                                <h4>San Diego Bay Sail</h4>
+                                <p>4:00 PM &middot; Harbor Island</p>
+                            </div>
+                            <span class="badge badge-warning">Waitlist</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div class="glass">
+                    <h3 class="section-title" style="font-size:1.125rem;">My Listings</h3>
+                    <div class="flex" style="flex-direction:column; gap:0.75rem;">
+                        <div class="my-listing">
+                            <div class="my-listing-info">
+                                <h4>Inflatable Paddleboard</h4>
+                                <p>For Sale &middot; $220 &middot; Posted Feb 20 &middot; <span style="color:var(--success);">Approved</span></p>
+                            </div>
+                            <div class="my-listing-actions">
+                                <button class="btn btn-secondary-outline btn-xs">Edit</button>
+                                <button class="btn btn-secondary-outline btn-xs">Renew</button>
+                            </div>
+                        </div>
+                        <div class="my-listing">
+                            <div class="my-listing-info">
+                                <h4>Dog Walking — North Park</h4>
+                                <p>Services &middot; $25/walk &middot; Posted Feb 15 &middot; <span style="color:var(--success);">Approved</span></p>
+                            </div>
+                            <div class="my-listing-actions">
+                                <button class="btn btn-secondary-outline btn-xs">Edit</button>
+                                <button class="btn btn-secondary-outline btn-xs">Renew</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem;">
+                        <a href="#" class="btn btn-cta btn-sm">Post New Listing</a>
+                    </div>
+                </div>
+
+                <div class="glass">
+                    <h3 class="section-title" style="font-size:1.125rem;">Recent Activity</h3>
+                    <div class="activity-item">
+                        <div class="activity-icon icon-event">📅</div>
+                        <div class="activity-content">
+                            <div class="activity-title">RSVP'd to Sunset Cliffs Hike</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon icon-message">💬</div>
+                        <div class="activity-content">
+                            <div class="activity-title">New message from Alex M. about "Paddleboard"</div>
+                            <div class="activity-time">5 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon icon-listing">📝</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Listing "Dog Walking" was approved</div>
+                            <div class="activity-time">1 day ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon icon-event">📅</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Completed: Yosemite Winter Hike</div>
+                            <div class="activity-time">3 days ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon icon-message">💬</div>
+                        <div class="activity-content">
+                            <div class="activity-title">Sent message to Chris T. about "Room in North Park"</div>
+                            <div class="activity-time">5 days ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal">
+        <div class="photo-credit">Photo: Glacier Point, Yosemite &middot; Gay Adventure Friends 2024</div>
+    </div>
+</body>
+</html>
