@@ -254,6 +254,15 @@
                     <h4>Image Release</h4>
                     <p>I hereby grant permission to Jeffrey Lehmann, Gay Adventure Friends, and any associated entity any and all of the foregoing to use any photograph, video, or other record of my image for any purpose whatsoever, including (but not limited to) telecasts, universal electronic mediums (ie. streaming services, mobile devices, and the internet), printed material and the press.</p>
 
+                    <h4>Photo &amp; Video Release</h4>
+                    <p>I understand that photographs, videos, and other media may be captured during Gay Adventure Friends events by organizers, designated photographers, or fellow participants. I grant Gay Adventure Friends, its organizers, and their agents an irrevocable, royalty-free, worldwide license to use, reproduce, modify, publish, and distribute any photographs, videos, or recordings in which I appear, in any format or medium now known or later developed, for the following purposes:</p>
+                    <p><strong>(a)</strong> Promotion and marketing of Gay Adventure Friends on social media platforms including but not limited to Facebook, Instagram, TikTok, and YouTube;<br>
+                    <strong>(b)</strong> Display on the Gay Adventure Friends website (gayadventurefriends.com), newsletters, and email communications;<br>
+                    <strong>(c)</strong> Event recaps, member spotlights, and community content shared with members;<br>
+                    <strong>(d)</strong> Print materials, press releases, and partnership promotions.</p>
+                    <p>I waive any right to inspect or approve the finished product or the use to which it may be applied. I release Gay Adventure Friends from any claims arising from distortion, alteration, or use in composite form. I understand that no compensation will be provided for such use. This release does not obligate Gay Adventure Friends to use any media containing my likeness.</p>
+                    <p>If I wish to request removal of specific media containing my likeness, I may submit a written request to jeffery@gayadventurefriends.com. Gay Adventure Friends will make reasonable efforts to remove such media from channels under its direct control within 30 days, though removal from third-party platforms or cached content cannot be guaranteed.</p>
+
                     <h4>Acknowledgement</h4>
                     <p>I have read this agreement and by participating with Gay Adventure Friends I understand its terms and that I have given up substantial rights by agreeing to this and have agreed to it freely and without inducement or assurance of any nature and intend it to be a complete and unconditional release of all liability to the greatest extent allowed by law. I also agree that if any portion of this agreement is held to be invalid the balance, notwithstanding, shall continue in full force and effect.</p>
 
@@ -277,11 +286,15 @@
                 </div>
                 <div class="checkbox-row">
                     <input type="checkbox" id="agree3" class="legal-check">
-                    <label for="agree3">I understand this waiver is <strong>valid for one year</strong> and covers all GAF events during that period.</label>
+                    <label for="agree3">I consent to the <strong>Photo &amp; Video Release</strong> and understand my likeness may be used on social media, the website, and promotional materials.</label>
                 </div>
                 <div class="checkbox-row">
                     <input type="checkbox" id="agree4" class="legal-check">
-                    <label for="agree4">I confirm my <strong>emergency contact information</strong> above is accurate and up to date.</label>
+                    <label for="agree4">I understand this waiver is <strong>valid for one year</strong> and covers all GAF events during that period.</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree5" class="legal-check">
+                    <label for="agree5">I confirm my <strong>emergency contact information</strong> above is accurate and up to date.</label>
                 </div>
 
                 <hr class="divider">
@@ -318,7 +331,7 @@
                     </div>
                     <div style="display:flex; gap:0.75rem;">
                         <a href="event-detail.html" class="btn btn-secondary-outline btn-sm">Cancel</a>
-                        <button class="btn btn-cta" id="submitBtn" style="padding: 0.75rem 2rem;">RSVP &amp; Sign Waiver</button>
+                        <button class="btn btn-cta" id="submitBtn" disabled style="padding: 0.75rem 2rem; opacity: 0.4; cursor: not-allowed;">RSVP &amp; Sign Waiver</button>
                     </div>
                 </div>
 
@@ -342,25 +355,42 @@
 
     <script src="slideshow.js"></script>
     <script>
+        var submitBtn = document.getElementById('submitBtn');
+        var checks = document.querySelectorAll('.legal-check');
+        var hasSignature = false;
+
+        // ─── Update Button State ───
+        function updateSubmitState() {
+            var allChecked = true;
+            checks.forEach(function(cb) { if (!cb.checked) allChecked = false; });
+            var ready = allChecked && hasSignature;
+            submitBtn.disabled = !ready;
+            submitBtn.style.opacity = ready ? '1' : '0.4';
+            submitBtn.style.cursor = ready ? 'pointer' : 'not-allowed';
+        }
+
+        // Listen on every checkbox
+        checks.forEach(function(cb) {
+            cb.addEventListener('change', updateSubmitState);
+        });
+
         // ─── Accept All Button ───
         document.getElementById('acceptAllBtn').addEventListener('click', function() {
-            document.querySelectorAll('.legal-check').forEach(function(cb) {
-                cb.checked = true;
-            });
+            checks.forEach(function(cb) { cb.checked = true; });
             this.textContent = 'All Accepted';
             this.style.background = '#22c55e';
             this.style.color = '#fff';
+            updateSubmitState();
         });
 
         // ─── Signature Pad ───
-        const canvas = document.getElementById('sigCanvas');
-        const ctx = canvas.getContext('2d');
-        const placeholder = document.getElementById('sigPlaceholder');
-        let drawing = false;
-        let hasSignature = false;
+        var canvas = document.getElementById('sigCanvas');
+        var ctx = canvas.getContext('2d');
+        var placeholder = document.getElementById('sigPlaceholder');
+        var drawing = false;
 
         function resizeCanvas() {
-            const rect = canvas.getBoundingClientRect();
+            var rect = canvas.getBoundingClientRect();
             canvas.width = rect.width;
             canvas.height = rect.height;
             ctx.strokeStyle = '#0f4a55';
@@ -372,8 +402,8 @@
         window.addEventListener('resize', resizeCanvas);
 
         function getPos(e) {
-            const rect = canvas.getBoundingClientRect();
-            const touch = e.touches ? e.touches[0] : e;
+            var rect = canvas.getBoundingClientRect();
+            var touch = e.touches ? e.touches[0] : e;
             return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
         }
 
@@ -382,15 +412,16 @@
             drawing = true;
             hasSignature = true;
             placeholder.style.opacity = '0';
-            const pos = getPos(e);
+            var pos = getPos(e);
             ctx.beginPath();
             ctx.moveTo(pos.x, pos.y);
+            updateSubmitState();
         }
 
         function draw(e) {
             if (!drawing) return;
             e.preventDefault();
-            const pos = getPos(e);
+            var pos = getPos(e);
             ctx.lineTo(pos.x, pos.y);
             ctx.stroke();
         }
@@ -409,22 +440,12 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             hasSignature = false;
             placeholder.style.opacity = '1';
+            updateSubmitState();
         });
 
-        // ─── Submit Validation ───
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            var checks = document.querySelectorAll('.legal-check');
-            var allChecked = true;
-            checks.forEach(function(cb) { if (!cb.checked) allChecked = false; });
-
-            if (!allChecked) {
-                alert('Please accept all legal acknowledgements above.');
-                return;
-            }
-            if (!hasSignature) {
-                alert('Please draw your signature above.');
-                return;
-            }
+        // ─── Submit ───
+        submitBtn.addEventListener('click', function() {
+            if (this.disabled) return;
             alert('RSVP confirmed! Your waiver has been signed and your spot is reserved.\n\nYou will receive a confirmation email shortly.');
         });
     </script>
