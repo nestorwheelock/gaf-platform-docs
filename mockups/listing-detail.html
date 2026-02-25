@@ -19,13 +19,11 @@
         .photo-hero {
             width: 100%;
             height: 240px;
-            background: linear-gradient(135deg, #e0d8cc, #c4b5a0);
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-            margin-bottom: 0.75rem;
+            object-fit: cover;
+            border-radius: 0.75rem 0.75rem 0 0;
+            display: block;
+            margin: -2rem -2rem 0.75rem -2rem;
+            width: calc(100% + 4rem);
         }
         .gallery-dots {
             display: flex;
@@ -162,7 +160,7 @@
         <div class="glass">
             <a href="listings.html" class="back-link">&larr; Back to Listings</a>
 
-            <div class="photo-hero">&#x1F3C4;</div>
+            <img src="../assets/images/kayaking.jpg" alt="Inflatable paddleboard listing photo" class="photo-hero">
             <div class="gallery-dots">
                 <div class="gallery-dot active"></div>
                 <div class="gallery-dot"></div>
