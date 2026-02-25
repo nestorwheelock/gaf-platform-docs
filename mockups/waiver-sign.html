@@ -153,12 +153,7 @@
     </style>
 </head>
 <body>
-    <div class="bg-slideshow">
-        <div class="slide" style="background-image: url('../assets/images/rock-climbing-sierra.jpg');"></div>
-        <div class="slide" style="background-image: url('../assets/images/whale-watching.jpg');"></div>
-        <div class="slide" style="background-image: url('../assets/images/slot-canyon-group.jpg');"></div>
-        <div class="slide" style="background-image: url('../assets/images/torrey-pines-photo.jpg');"></div>
-    </div>
+    <div class="bg-slideshow"></div>
 
     <nav>
         <div class="nav-inner">
@@ -280,34 +275,10 @@
         </div>
     </footer>
 
-    <div class="bg-reveal">
-        <div class="photo-credit">Gay Adventure Friends &middot; SoCal Adventures</div>
-    </div>
+    <div class="bg-reveal"></div>
 
+    <script src="slideshow.js"></script>
     <script>
-        const nav = document.querySelector('nav');
-        const footer = document.querySelector('footer');
-        const main = document.querySelector('main');
-
-        function updateOpacity() {
-            const vh = window.innerHeight;
-            nav.classList.toggle('scrolled', window.scrollY > 40);
-
-            const footerTop = footer.getBoundingClientRect().top;
-            const fStart = vh * 0.33;
-            const fEnd = vh * 0.1;
-            let fOp = footerTop >= fStart ? 1 : footerTop <= fEnd ? 0 : (footerTop - fEnd) / (fStart - fEnd);
-            footer.style.opacity = fOp;
-
-            const mainBottom = main.getBoundingClientRect().bottom;
-            const nStart = vh * 0.8;
-            const nEnd = vh * 0.2;
-            let nOp = mainBottom >= nStart ? 1 : mainBottom <= nEnd ? 0 : (mainBottom - nEnd) / (nStart - nEnd);
-            nav.style.opacity = nOp;
-        }
-
-        updateOpacity();
-        window.addEventListener('scroll', updateOpacity);
 
         // Signature pad
         const canvas = document.getElementById('sigCanvas');

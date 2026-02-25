@@ -31,12 +31,7 @@
     </style>
 </head>
 <body>
-    <div class="bg-slideshow">
-        <div class="slide" style="background-image: url('../assets/images/torrey-pines-coast-group.jpg');"></div>
-        <div class="slide" style="background-image: url('../assets/images/green-hills-hiking.jpg');"></div>
-        <div class="slide" style="background-image: url('../assets/images/whale-watching.jpg');"></div>
-        <div class="slide" style="background-image: url('../assets/images/mazatlan-rooftop.jpg');"></div>
-    </div>
+    <div class="bg-slideshow"></div>
 
     <nav>
         <div class="nav-inner">
@@ -135,38 +130,8 @@
         </div>
     </footer>
 
-    <div class="bg-reveal">
-        <div class="photo-credit">Gay Adventure Friends &middot; SoCal Adventures</div>
-    </div>
+    <div class="bg-reveal"></div>
 
-    <script>
-        const nav = document.querySelector('nav');
-        const footer = document.querySelector('footer');
-        const main = document.querySelector('main');
-
-        function updateOpacity() {
-            const vh = window.innerHeight;
-
-            // Nav: darken on scroll
-            nav.classList.toggle('scrolled', window.scrollY > 40);
-
-            // Footer: fade from 33% viewport to 10%
-            const footerTop = footer.getBoundingClientRect().top;
-            const fStart = vh * 0.33;
-            const fEnd = vh * 0.1;
-            let fOp = footerTop >= fStart ? 1 : footerTop <= fEnd ? 0 : (footerTop - fEnd) / (fStart - fEnd);
-            footer.style.opacity = fOp;
-
-            // Nav: fade when main bottom reaches 80% down to 20%
-            const mainBottom = main.getBoundingClientRect().bottom;
-            const nStart = vh * 0.8;
-            const nEnd = vh * 0.2;
-            let nOp = mainBottom >= nStart ? 1 : mainBottom <= nEnd ? 0 : (mainBottom - nEnd) / (nStart - nEnd);
-            nav.style.opacity = nOp;
-        }
-
-        updateOpacity();
-        window.addEventListener('scroll', updateOpacity);
-    </script>
+    <script src="slideshow.js"></script>
 </body>
 </html>
