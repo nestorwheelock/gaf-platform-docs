@@ -6,9 +6,6 @@
     <title>Community Classifieds — Gay Adventure Friends</title>
     <link rel="stylesheet" href="gaf-theme.css">
     <style>
-        body {
-            background-image: url('../assets/images/green-hills-hiking.jpg');
-        }
         .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
         .search-bar { display: flex; gap: 0.75rem; flex-wrap: wrap; }
         .search-bar input { flex: 1; min-width: 200px; }
@@ -18,9 +15,9 @@
             border-radius: 999px;
             font-size: 0.8125rem;
             font-weight: 500;
-            border: 1px solid var(--earth-light);
+            border: 1px solid var(--border);
             background: #fff;
-            color: var(--driftwood);
+            color: var(--text);
             cursor: pointer;
             transition: all 0.2s;
             text-decoration: none;
@@ -41,10 +38,10 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        .listing-title { font-size: 1rem; font-weight: 600; color: var(--driftwood); margin-bottom: 0.25rem; }
-        .listing-excerpt { font-size: 0.8125rem; color: var(--granite); line-height: 1.5; margin-bottom: 0.75rem; }
+        .listing-title { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+        .listing-excerpt { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
         .listing-footer { display: flex; justify-content: space-between; align-items: center; }
-        .listing-meta { font-size: 0.75rem; color: var(--granite); }
+        .listing-meta { font-size: 0.75rem; color: var(--text-muted); }
         .listing-price { font-size: 0.9375rem; font-weight: 700; color: var(--primary); }
         .placeholder-img {
             width: 100%;
@@ -54,28 +51,35 @@
             justify-content: center;
             font-size: 2rem;
         }
-        .img-housing { background: linear-gradient(135deg, var(--sky-light), var(--primary-light)); }
-        .img-services { background: linear-gradient(135deg, var(--trail-light), var(--trail)); }
-        .img-jobs { background: linear-gradient(135deg, var(--accent-light), var(--accent)); }
-        .img-roommate { background: linear-gradient(135deg, var(--secondary-light), var(--secondary)); }
-        .img-forsale { background: linear-gradient(135deg, var(--earth-light), var(--earth)); }
+        .img-housing { background: linear-gradient(135deg, #dbeafe, #93c5fd); }
+        .img-services { background: linear-gradient(135deg, #dcfce7, #86efac); }
+        .img-jobs { background: linear-gradient(135deg, #fef3c7, #fcd34d); }
+        .img-roommate { background: linear-gradient(135deg, #ffe4e6, #fda4af); }
+        .img-forsale { background: linear-gradient(135deg, #e0d8cc, #c4b5a0); }
         .pagination { display: flex; justify-content: center; align-items: center; gap: 0.5rem; margin-top: 1.5rem; }
         .page-btn {
             padding: 0.5rem 0.875rem;
             border-radius: 6px;
             font-size: 0.8125rem;
-            border: 1px solid var(--earth-light);
+            border: 1px solid var(--border);
             background: #fff;
-            color: var(--driftwood);
+            color: var(--text);
             cursor: pointer;
             text-decoration: none;
         }
         .page-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
         .page-btn:hover:not(.active) { border-color: var(--primary); }
-        .results-count { font-size: 0.8125rem; color: var(--granite); margin-bottom: 1rem; }
+        .results-count { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 1rem; }
     </style>
 </head>
 <body>
+    <div class="bg-slideshow">
+        <div class="slide" style="background-image: url('../assets/images/boulder-hike-group.jpg');"></div>
+        <div class="slide" style="background-image: url('../assets/images/rock-arch-ocean.jpg');"></div>
+        <div class="slide" style="background-image: url('../assets/images/desert-group-selfie.jpg');"></div>
+        <div class="slide" style="background-image: url('../assets/images/wetlands-overlook.jpg');"></div>
+    </div>
+
     <nav>
         <div class="nav-inner">
             <a href="home.html" class="nav-logo">
@@ -218,7 +222,14 @@
     </footer>
 
     <div class="bg-reveal">
-        <div class="photo-credit">Photo: Hiking, Southern California &middot; Gay Adventure Friends</div>
+        <div class="photo-credit">Gay Adventure Friends &middot; SoCal Adventures</div>
     </div>
+
+    <script>
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        });
+    </script>
 </body>
 </html>
