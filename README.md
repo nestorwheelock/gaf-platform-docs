@@ -37,6 +37,7 @@ This is the **public documentation** for the GAF platform. It describes the syst
 
 | Document | Description |
 |----------|-------------|
+| [Branding](docs/BRANDING.md) | Color palette, typography, glass design, visual identity |
 | [Architecture](docs/ARCHITECTURE.md) | System design, component diagram, tech justification |
 | [Database](docs/DATABASE.md) | Full entity-relationship diagram (24 tables) |
 | [API](docs/API.md) | Complete route contract (50 endpoints) |
