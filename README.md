@@ -65,23 +65,96 @@ That's it. Click through the nav to explore all 32 pages — events, RSVP with d
 
 > **Tip:** Use Chrome, Firefox, or Safari for the best experience. The frosted glass effects and background slideshow use modern CSS.
 
-## Interactive Mockups
+## Screenshots
 
-The [`mockups/`](mockups/) directory contains **32 interactive HTML mockup pages** built on a shared CSS design system. Open any file in a browser to see the full frosted-glass-over-photography theme in action.
+30 pages, all built on a shared frosted-glass-over-photography design system. Click any thumbnail for full size.
 
-### Design System
+### Public Pages
 
-- **Frosted glass over photography** — fixed background with a 20-photo crossfade slideshow, translucent glass content cards
-- **Shared CSS design system** — all 32 pages share `gaf-theme.css`, the same design tokens that will become Tailwind config in production
-- **Responsive design** — mobile breakpoints across all pages
+<table>
+<tr>
+<td align="center"><a href="screenshots/home.png"><img src="screenshots/thumbs/home.png" width="220"><br><b>Home</b></a></td>
+<td align="center"><a href="screenshots/events.png"><img src="screenshots/thumbs/events.png" width="220"><br><b>Events</b></a></td>
+<td align="center"><a href="screenshots/event-detail.png"><img src="screenshots/thumbs/event-detail.png" width="220"><br><b>Event Detail</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="screenshots/listings.png"><img src="screenshots/thumbs/listings.png" width="220"><br><b>Listings</b></a></td>
+<td align="center"><a href="screenshots/listing-detail.png"><img src="screenshots/thumbs/listing-detail.png" width="220"><br><b>Listing Detail</b></a></td>
+<td align="center"><a href="screenshots/contact.png"><img src="screenshots/thumbs/contact.png" width="220"><br><b>Contact</b></a></td>
+</tr>
+</table>
 
-### Page Highlights
+### RSVP & Waivers
 
-- **Public pages** — Home, About, Join, Events, Contact, Listings, and more
-- **Full RSVP + waiver flow** — digital signature capture, legal checkboxes, liability acknowledgment
-- **7-page admin panel** — revenue dashboard, member management, event moderation, content editing
-- **10 member profile pages** — cropped face photos, membership cards, RSVP history, activity feeds
-- **Authentication flows** — login, registration, password reset, Facebook OAuth
+<table>
+<tr>
+<td align="center"><a href="screenshots/rsvp.png"><img src="screenshots/thumbs/rsvp.png" width="220"><br><b>RSVP + Waiver</b></a></td>
+<td align="center"><a href="screenshots/waiver-sign.png"><img src="screenshots/thumbs/waiver-sign.png" width="220"><br><b>Waiver Sign</b></a></td>
+</tr>
+</table>
+
+### Auth & Membership
+
+<table>
+<tr>
+<td align="center"><a href="screenshots/login.png"><img src="screenshots/thumbs/login.png" width="220"><br><b>Login</b></a></td>
+<td align="center"><a href="screenshots/join.png"><img src="screenshots/thumbs/join.png" width="220"><br><b>Join / Membership</b></a></td>
+</tr>
+</table>
+
+### Messaging
+
+<table>
+<tr>
+<td align="center"><a href="screenshots/messages.png"><img src="screenshots/thumbs/messages.png" width="220"><br><b>Messages</b></a></td>
+<td align="center"><a href="screenshots/conversation.png"><img src="screenshots/thumbs/conversation.png" width="220"><br><b>Conversation</b></a></td>
+</tr>
+</table>
+
+### Member Profiles
+
+<table>
+<tr>
+<td align="center"><a href="screenshots/member.png"><img src="screenshots/thumbs/member.png" width="220"><br><b>My Profile</b></a></td>
+<td align="center"><a href="screenshots/profile-jeffrey.png"><img src="screenshots/thumbs/profile-jeffrey.png" width="220"><br><b>Jeffrey L.</b></a></td>
+<td align="center"><a href="screenshots/profile-alex.png"><img src="screenshots/thumbs/profile-alex.png" width="220"><br><b>Alex M.</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="screenshots/profile-chris.png"><img src="screenshots/thumbs/profile-chris.png" width="220"><br><b>Chris T.</b></a></td>
+<td align="center"><a href="screenshots/profile-david.png"><img src="screenshots/thumbs/profile-david.png" width="220"><br><b>David R.</b></a></td>
+<td align="center"><a href="screenshots/profile-jason.png"><img src="screenshots/thumbs/profile-jason.png" width="220"><br><b>Jason L.</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="screenshots/profile-kevin.png"><img src="screenshots/thumbs/profile-kevin.png" width="220"><br><b>Kevin P.</b></a></td>
+<td align="center"><a href="screenshots/profile-mark.png"><img src="screenshots/thumbs/profile-mark.png" width="220"><br><b>Mark S.</b></a></td>
+<td align="center"><a href="screenshots/profile-miguel.png"><img src="screenshots/thumbs/profile-miguel.png" width="220"><br><b>Miguel S.</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="screenshots/profile-carlos.png"><img src="screenshots/thumbs/profile-carlos.png" width="220"><br><b>Carlos M.</b></a></td>
+<td align="center"><a href="screenshots/profile-ryan.png"><img src="screenshots/thumbs/profile-ryan.png" width="220"><br><b>Ryan T.</b></a></td>
+<td></td>
+</tr>
+</table>
+
+### Admin Panel
+
+<table>
+<tr>
+<td align="center"><a href="screenshots/admin.png"><img src="screenshots/thumbs/admin.png" width="220"><br><b>Dashboard</b></a></td>
+<td align="center"><a href="screenshots/admin-members.png"><img src="screenshots/thumbs/admin-members.png" width="220"><br><b>Members</b></a></td>
+<td align="center"><a href="screenshots/admin-events.png"><img src="screenshots/thumbs/admin-events.png" width="220"><br><b>Events</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="screenshots/admin-community.png"><img src="screenshots/thumbs/admin-community.png" width="220"><br><b>Community</b></a></td>
+<td align="center"><a href="screenshots/admin-subscribers.png"><img src="screenshots/thumbs/admin-subscribers.png" width="220"><br><b>Subscribers</b></a></td>
+<td align="center"><a href="screenshots/admin-audit.png"><img src="screenshots/thumbs/admin-audit.png" width="220"><br><b>Audit Log</b></a></td>
+</tr>
+<tr>
+<td align="center"><a href="screenshots/admin-settings.png"><img src="screenshots/thumbs/admin-settings.png" width="220"><br><b>Settings</b></a></td>
+<td></td>
+<td></td>
+</tr>
+</table>
 
 ## Key Numbers
 
