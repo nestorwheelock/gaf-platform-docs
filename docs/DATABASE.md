@@ -4,121 +4,67 @@ The GAF platform uses PostgreSQL with 24 tables organized across 10 domains. The
 
 ## Entity-Relationship Diagram
 
+> The diagram below shows key business columns per table. All tables include standard `id` (UUID PK), `created_at`, and `updated_at` timestamps. Tables with soft delete also carry a `deleted_at` column. Full column details are described in the domain narratives below.
+
 ```mermaid
 erDiagram
-    %% ─── AUTH DOMAIN ───
     users {
         uuid id PK
         varchar email UK
-        varchar password_hash
-        varchar status
         uuid person_id FK
-        timestamp last_login_at
         varchar facebook_id UK
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
+        varchar status
     }
-
     sessions {
         uuid id PK
         uuid user_id FK
         varchar token
         timestamp expires_at
-        timestamp revoked_at
-        varchar ip_address
-        text user_agent
-        timestamp created_at
     }
-
     login_attempts {
         uuid id PK
         varchar email
         boolean success
         varchar ip_address
-        text user_agent
-        timestamp created_at
     }
-
-    %% ─── PARTIES DOMAIN ───
     persons {
         uuid id PK
         varchar first_name
         varchar last_name
         varchar email
         varchar phone
-        date date_of_birth
-        varchar lead_status
-        varchar lead_source
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
     organizations {
         uuid id PK
         varchar name
         varchar org_type
-        varchar website
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
     party_relationships {
         uuid id PK
         uuid from_party_id FK
         uuid to_party_id FK
         varchar relationship_type
-        varchar title
-        boolean is_primary
-        boolean contract_signed
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
-    %% ─── TENANT DOMAIN ───
     tenants {
         uuid id PK
         varchar name
         varchar slug UK
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
     tenant_members {
         uuid id PK
         uuid tenant_id FK
         uuid user_id FK
-        enum role "owner | admin | member | guest"
-        enum status "invited | active | removed"
+        enum role
+        enum status
         boolean is_trusted
-        varchar invite_token
-        timestamp invite_expires_at
-        uuid invited_by FK
-        timestamp accepted_at
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
-    %% ─── TAXONOMY DOMAIN ───
     taxonomy_terms {
         uuid id PK
         uuid tenant_id FK
         uuid parent_id FK
         varchar name
         varchar slug UK
-        text description
-        int sort_order
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
-    %% ─── DIRECTORY LISTINGS DOMAIN ───
     directory_listings {
         uuid id PK
         uuid tenant_id FK
@@ -126,72 +72,39 @@ erDiagram
         varchar listing_type
         varchar status
         jsonb metadata
-        int sort_order
         boolean is_featured
         text bio
-        text notes
-        timestamp submitted_at
-        timestamp reviewed_at
-        uuid reviewed_by_id
-        text review_notes
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
-    %% ─── STORAGE DOMAIN ───
     stored_files {
         uuid id PK
         varchar path
         varchar original_filename
         varchar content_type
         bigint size_bytes
-        varchar sha256
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
     listing_photos {
         uuid id PK
         uuid listing_id FK
         uuid file_id FK
         int sort_order
-        timestamp created_at
     }
-
-    %% ─── KEYWORDS DOMAIN ───
     keywords {
         uuid id PK
         uuid tenant_id FK
         varchar name
         varchar slug UK
-        timestamp created_at
     }
-
     listing_keywords {
         uuid listing_id FK
         uuid keyword_id FK
     }
-
-    %% ─── COMMUNICATION DOMAIN ───
     conversations {
         uuid id PK
         uuid tenant_id FK
         varchar subject
         varchar status
         varchar conversation_type
-        varchar related_type
-        uuid related_id
-        timestamp last_inbound_at
-        timestamp last_outbound_at
-        timestamp closed_at
-        uuid closed_by_id
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
     chat_messages {
         uuid id PK
         uuid conversation_id FK
@@ -199,96 +112,51 @@ erDiagram
         varchar to_address
         text body_text
         varchar direction
-        varchar channel
-        varchar status
-        timestamp sent_at
-        timestamp delivered_at
-        timestamp read_at
-        text error_message
-        timestamp created_at
-        timestamp updated_at
     }
-
-    %% ─── NOTIFICATIONS DOMAIN ───
     notifications {
         uuid id PK
         uuid tenant_id FK
         uuid recipient_party_id FK
         varchar event_type
         varchar title
-        text body
         varchar channel
         varchar status
-        varchar entity_type
-        uuid entity_id
-        timestamp read_at
-        varchar idempotency_key UK
-        timestamp created_at
-        timestamp updated_at
     }
-
     notification_preferences {
         uuid id PK
         uuid party_id FK
         uuid tenant_id FK
         varchar channel
         boolean enabled
-        time quiet_hours_start
-        time quiet_hours_end
-        varchar quiet_hours_tz
-        timestamp created_at
-        timestamp updated_at
     }
-
-    %% ─── CALENDAR DOMAIN ───
     calendar_events {
         uuid id PK
         uuid tenant_id FK
         varchar title
-        text description
         varchar location
         timestamp starts_at
         timestamp ends_at
-        boolean all_day
-        varchar recurrence_rule
         uuid organizer_id FK
-        varchar status
-        varchar visibility
+        varchar recurrence_rule
         int max_attendees
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
-    %% ─── ENCOUNTERS DOMAIN ───
     encounters {
         uuid id PK
         uuid tenant_id FK
         varchar encounter_type
-        varchar status "scheduled | active | completed"
+        varchar status
         timestamp scheduled_start
         timestamp scheduled_end
-        timestamp actual_start
-        timestamp actual_end
-        text notes
         varchar related_type
         uuid related_id
-        timestamp created_at
-        timestamp updated_at
-        timestamp deleted_at
     }
-
     encounter_participants {
         uuid id PK
         uuid encounter_id FK
         uuid party_id FK
-        varchar role "organizer | attendee"
-        varchar status "invited | confirmed | declined"
-        timestamp created_at
-        timestamp updated_at
+        varchar role
+        varchar status
     }
-
-    %% ─── RESERVATIONS DOMAIN ───
     capacity_pools {
         uuid id PK
         varchar name
@@ -296,21 +164,14 @@ erDiagram
         int available
         varchar related_type
         uuid related_id
-        timestamp created_at
-        timestamp updated_at
     }
-
     holds {
         uuid id PK
         uuid pool_id FK
         uuid party_id FK
         int quantity
         timestamp expires_at
-        timestamp released_at
-        timestamp converted_at
-        timestamp created_at
     }
-
     reservations {
         uuid id PK
         uuid pool_id FK
@@ -318,52 +179,28 @@ erDiagram
         int quantity
         varchar status
         uuid hold_id FK
-        timestamp cancelled_at
-        timestamp created_at
-        timestamp updated_at
     }
-
-    %% ─── AUDIT DOMAIN ───
     audit_logs {
         uuid id PK
-        varchar action "create | update | delete | archive"
+        varchar action
         uuid actor_id FK
-        varchar actor_display
-        boolean is_system
         varchar model_label
         varchar object_id
-        varchar object_display
         jsonb changes
-        jsonb metadata
-        varchar sensitivity "normal | sensitive | secret"
-        varchar ip_address
-        text user_agent
-        varchar request_id
-        varchar trace_id
-        timestamp created_at
+        varchar sensitivity
     }
-
-    %% ─── JOBS DOMAIN ───
     background_jobs {
         uuid id PK
         varchar job_type
-        varchar status "pending | processing | completed | failed"
+        varchar status
         jsonb payload
-        jsonb result
-        text error_message
         int attempts
         int max_attempts
-        timestamp scheduled_at
-        timestamp started_at
-        timestamp completed_at
-        timestamp created_at
-        timestamp updated_at
     }
 
-    %% ─── RELATIONSHIPS ───
     users ||--o| persons : "has profile"
     users ||--o{ sessions : "has sessions"
-    users ||--o{ tenant_members : "belongs to tenants"
+    users ||--o{ tenant_members : "belongs to"
 
     persons ||--o{ directory_listings : "creates"
     persons ||--o{ party_relationships : "from"
@@ -397,7 +234,6 @@ erDiagram
     holds ||--o| reservations : "converts to"
 
     taxonomy_terms ||--o{ taxonomy_terms : "parent of"
-
     users ||--o{ audit_logs : "performed by"
 ```
 
