@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Liability Waiver — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        body {
+            background-image: url('https://gayadventurefriends.com/wp-content/uploads/2024/07/Kayak-Santa-Cruz-Is-web1_5916.jpg');
+        }
+        .waiver-container { max-width: 48rem; margin: 0 auto; }
+        .waiver-hero {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .waiver-hero-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+        .waiver-hero-info h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+        .waiver-hero-info p {
+            font-size: 0.875rem;
+            color: var(--granite);
+            line-height: 1.5;
+        }
+        .waiver-event-card {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: var(--info-bg);
+            border-radius: 0.5rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .waiver-event-date {
+            text-align: center;
+            flex-shrink: 0;
+            width: 50px;
+        }
+        .waiver-event-date .month {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--secondary);
+            letter-spacing: 0.05em;
+        }
+        .waiver-event-date .day {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+        .waiver-event-detail h4 { font-size: 0.9375rem; margin-bottom: 0.125rem; }
+        .waiver-event-detail p { font-size: 0.75rem; color: var(--granite); }
+        .waiver-text {
+            background: #fff;
+            border: 1px solid var(--earth-light);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            max-height: 280px;
+            overflow-y: auto;
+            font-size: 0.8125rem;
+            line-height: 1.75;
+            color: var(--driftwood);
+            margin-bottom: 1.5rem;
+        }
+        .waiver-text h4 {
+            font-size: 0.875rem;
+            color: var(--primary-dark);
+            margin-top: 1rem;
+            margin-bottom: 0.375rem;
+        }
+        .waiver-text h4:first-child { margin-top: 0; }
+        .waiver-text p { margin-bottom: 0.75rem; }
+        .sig-section { margin-bottom: 1.5rem; }
+        .sig-section label {
+            display: block;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--driftwood);
+            margin-bottom: 0.5rem;
+        }
+        .sig-canvas-wrap {
+            border: 2px dashed var(--earth-light);
+            border-radius: 0.5rem;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .sig-canvas-wrap:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 107, 122, 0.1);
+        }
+        .sig-canvas {
+            width: 100%;
+            height: 140px;
+            display: block;
+            cursor: crosshair;
+        }
+        .sig-canvas-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8125rem;
+            color: var(--granite);
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .sig-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        .checkbox-row {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        .checkbox-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: var(--primary);
+        }
+        .checkbox-row label {
+            font-size: 0.8125rem;
+            font-weight: 400;
+            color: var(--driftwood);
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        .checkbox-row label strong { color: var(--primary-dark); }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-group { margin-bottom: 0; }
+        .form-group label { margin-bottom: 0.375rem; }
+        .submit-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--earth-light);
+            flex-wrap: wrap;
+        }
+        .device-info {
+            font-size: 0.6875rem;
+            color: var(--granite);
+            line-height: 1.5;
+        }
+        .device-info strong { color: var(--driftwood); }
+        .progress-steps {
+            display: flex;
+            gap: 0;
+            margin-bottom: 2rem;
+        }
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--granite);
+            padding-top: 1.75rem;
+        }
+        .step::before {
+            content: attr(data-num);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--earth-light);
+            color: var(--granite);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .step.active::before {
+            background: var(--primary);
+            color: #fff;
+        }
+        .step.active { color: var(--primary-dark); }
+        .step.done::before {
+            background: var(--success);
+            color: #fff;
+            content: "\2713";
+        }
+        .step.done { color: var(--success); }
+        .step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            top: 13px;
+            left: calc(50% + 18px);
+            width: calc(100% - 36px);
+            height: 2px;
+            background: var(--earth-light);
+        }
+        .step.done:not(:last-child)::after { background: var(--success); }
+        @media (max-width: 640px) {
+            .form-row { grid-template-columns: 1fr; }
+            .waiver-hero { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.png" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="#">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="#">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="waiver-container">
+            <div class="glass">
+                <div class="waiver-hero">
+                    <div class="waiver-hero-icon">📋</div>
+                    <div class="waiver-hero-info">
+                        <h2>Liability Waiver</h2>
+                        <p>Please review and sign the liability waiver below to complete your RSVP.</p>
+                    </div>
+                </div>
+
+                <div class="progress-steps">
+                    <div class="step done" data-num="1">RSVP</div>
+                    <div class="step active" data-num="2">Waiver</div>
+                    <div class="step" data-num="3">Confirmed</div>
+                </div>
+
+                <div class="waiver-event-card">
+                    <div class="waiver-event-date">
+                        <div class="month">Mar</div>
+                        <div class="day">22</div>
+                    </div>
+                    <div class="waiver-event-detail">
+                        <h4>Channel Islands Sea Cave Kayak</h4>
+                        <p>Sat, Mar 22, 2026 &middot; 7:00 AM &middot; Ventura Harbor, Ventura</p>
+                    </div>
+                    <span class="badge badge-warning">Waiver Pending</span>
+                </div>
+
+                <div class="waiver-text">
+                    <h4>Assumption of Risk and Liability Waiver</h4>
+                    <p>I, the undersigned participant, acknowledge that adventure activities including but not limited to hiking, kayaking, sailing, rock climbing, snorkeling, and camping involve inherent risks. These risks include but are not limited to physical injury, drowning, falls, wildlife encounters, weather-related hazards, equipment failure, and other dangers.</p>
+
+                    <h4>Voluntary Participation</h4>
+                    <p>I voluntarily choose to participate in the activity described above, organized by Gay Adventure Friends ("GAF"). I understand the nature of the activity and its physical demands. I confirm that I am physically capable of participating and have no medical conditions that would prevent safe participation, or I have disclosed such conditions to the trip leader.</p>
+
+                    <h4>Release of Liability</h4>
+                    <p>In consideration of being allowed to participate, I hereby release, waive, discharge, and covenant not to sue Gay Adventure Friends, its officers, directors, volunteers, trip leaders, and agents from any and all liability, claims, demands, or causes of action arising out of or related to any loss, damage, or injury sustained during or as a result of participation in this activity.</p>
+
+                    <h4>Medical Authorization</h4>
+                    <p>In the event of an emergency, I authorize GAF trip leaders and volunteers to obtain emergency medical treatment on my behalf. I agree to bear all costs of such treatment. I understand that GAF does not provide medical insurance coverage for participants.</p>
+
+                    <h4>Photo and Media Release</h4>
+                    <p>I grant GAF permission to use photographs and video taken during this activity for promotional purposes, including social media, website, and printed materials. I understand I may opt out by notifying the trip leader before the activity begins.</p>
+
+                    <h4>Duration</h4>
+                    <p>This waiver is valid for one (1) year from the date of signing and applies to all GAF-organized activities during that period. A new waiver must be signed upon expiration.</p>
+                </div>
+
+                <div class="sig-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Full Legal Name</label>
+                            <input type="text" value="Jeffrey Martinez" readonly style="background:var(--sand);">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="text" value="February 25, 2026" readonly style="background:var(--sand);">
+                        </div>
+                    </div>
+
+                    <label>Signature — Draw your signature below</label>
+                    <div class="sig-canvas-wrap">
+                        <canvas class="sig-canvas" id="sigCanvas"></canvas>
+                        <div class="sig-canvas-placeholder" id="sigPlaceholder">Draw your signature here</div>
+                    </div>
+                    <div class="sig-actions">
+                        <button class="btn btn-secondary-outline btn-xs" id="sigClear">Clear</button>
+                    </div>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree1">
+                    <label for="agree1">I have <strong>read and understand</strong> the assumption of risk and liability waiver above.</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree2">
+                    <label for="agree2">I confirm that the <strong>signature above is my own</strong> and that I am signing voluntarily.</label>
+                </div>
+
+                <div class="submit-row">
+                    <div class="device-info">
+                        <strong>IP:</strong> 72.134.xxx.xxx<br>
+                        <strong>Device:</strong> Chrome 122 / macOS<br>
+                        <strong>Timestamp:</strong> 2026-02-25T14:32:08Z
+                    </div>
+                    <div style="display:flex; gap:0.75rem;">
+                        <a href="member.html" class="btn btn-secondary-outline btn-sm">Cancel</a>
+                        <button class="btn btn-primary btn-sm" id="submitBtn">Sign Waiver</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Events</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal">
+        <div class="photo-credit">Photo: Kayaking, Channel Islands &middot; Gay Adventure Friends 2024</div>
+    </div>
+
+    <script>
+        // Signature pad
+        const canvas = document.getElementById('sigCanvas');
+        const ctx = canvas.getContext('2d');
+        const placeholder = document.getElementById('sigPlaceholder');
+        let drawing = false;
+        let hasSignature = false;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.strokeStyle = '#0f4a55';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches ? e.touches[0] : e;
+            return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+        }
+
+        function startDraw(e) {
+            e.preventDefault();
+            drawing = true;
+            hasSignature = true;
+            placeholder.style.opacity = '0';
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+        }
+
+        function stopDraw() { drawing = false; }
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDraw);
+        canvas.addEventListener('mouseleave', stopDraw);
+        canvas.addEventListener('touchstart', startDraw);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDraw);
+
+        document.getElementById('sigClear').addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasSignature = false;
+            placeholder.style.opacity = '1';
+        });
+
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const cb1 = document.getElementById('agree1').checked;
+            const cb2 = document.getElementById('agree2').checked;
+            if (!hasSignature) {
+                alert('Please draw your signature above.');
+                return;
+            }
+            if (!cb1 || !cb2) {
+                alert('Please check both agreement boxes.');
+                return;
+            }
+            alert('Waiver signed successfully! Redirecting to your profile...');
+        });
+    </script>
+</body>
+</html>
