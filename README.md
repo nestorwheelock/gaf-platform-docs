@@ -51,6 +51,20 @@ This is the **public documentation** for the GAF platform. It describes the syst
 | [Migration](docs/MIGRATION.md) | WordPress to GAF transition plan |
 | [Roadmap](docs/ROADMAP.md) | Phase timeline with completion status |
 
+## Try the Mockups
+
+Want to see the platform in action? Download and open locally — no server required.
+
+### Quick Start
+
+1. **Download** — [Download ZIP](https://github.com/nestorwheelock/gaf-platform-docs/archive/refs/heads/master.zip)
+2. **Unzip** the file anywhere on your computer
+3. **Open** `gaf-platform-docs-master/mockups/home.html` in your browser
+
+That's it. Click through the nav to explore all 32 pages — events, RSVP with digital signature, admin dashboard, member profiles, messaging, and more. Everything runs from static files, no internet connection needed after download.
+
+> **Tip:** Use Chrome, Firefox, or Safari for the best experience. The frosted glass effects and background slideshow use modern CSS.
+
 ## Interactive Mockups
 
 The [`mockups/`](mockups/) directory contains **32 interactive HTML mockup pages** built on a shared CSS design system. Open any file in a browser to see the full frosted-glass-over-photography theme in action.
