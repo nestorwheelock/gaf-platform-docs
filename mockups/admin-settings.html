@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings — Admin — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        /* ─── ADMIN SIDEBAR LAYOUT ─── */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 5.5rem;
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+        .sidebar-nav a {
+            display: block;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .sidebar-nav a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .sidebar-nav a.active {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(26, 107, 122, 0.1);
+        }
+        .sidebar-icon {
+            display: inline-block;
+            width: 1.25rem;
+            text-align: center;
+            margin-right: 0.5rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ─── STAT CARDS ─── */
+        .stat-card {
+            text-align: center;
+            padding: 1.25rem 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.375rem;
+        }
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .stat-warning .stat-number { color: var(--warning-text); }
+        .stat-warning { border-left: 3px solid #f59e0b; }
+        .stat-primary .stat-number { color: var(--primary); }
+        .stat-primary { border-left: 3px solid var(--primary); }
+        .stat-success .stat-number { color: var(--success); }
+        .stat-success { border-left: 3px solid var(--success); }
+        .stat-info .stat-number { color: var(--info-text); }
+        .stat-info { border-left: 3px solid #3b82f6; }
+
+        /* ─── SECTION TITLES ─── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* ─── MEMBER TABLE ─── */
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .member-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .member-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .member-table tr:last-child td { border-bottom: none; }
+        .member-table a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .member-table a:hover { text-decoration: underline; }
+        .tier-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tier-gold { background: #fef3c7; color: #92400e; }
+        .tier-frequent { background: #dbeafe; color: #1e40af; }
+        .tier-supporter { background: #e0f2f1; color: var(--primary-dark); }
+        .tier-basic { background: #f3f4f6; color: #6b7280; }
+
+        /* ─── FORM STYLES ─── */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.375rem;
+        }
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="url"] {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--text);
+            transition: border-color 0.15s;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(26, 107, 122, 0.1);
+        }
+
+        /* ─── DANGER ZONE ─── */
+        .danger-zone {
+            border-left: 4px solid #ef4444;
+        }
+        .danger-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 0;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+        }
+        .danger-item:last-child {
+            border-bottom: none;
+        }
+        .danger-item-text {
+            flex: 1;
+        }
+        .danger-item-text strong {
+            display: block;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.125rem;
+        }
+        .danger-item-text span {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 0.25rem;
+            }
+            .sidebar-nav a {
+                white-space: nowrap;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+            .member-table {
+                font-size: 0.75rem;
+            }
+            .member-table th,
+            .member-table td {
+                padding: 0.5rem;
+            }
+            .danger-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .danger-item .btn {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Community</a>
+                <a href="contact.html">Contact</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+                <a href="login.html">Login</a>
+                <a href="admin.html" class="active">Admin</a>
+                <a href="join.html" class="btn-join">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="admin-layout">
+
+            <!-- ─── SIDEBAR ─── -->
+            <aside class="glass sidebar" style="padding: 1rem;">
+                <ul class="sidebar-nav">
+                    <li><a href="admin.html"><span class="sidebar-icon">&#9632;</span>Dashboard</a></li>
+                    <li><a href="admin-members.html"><span class="sidebar-icon">&#9775;</span>Members</a></li>
+                    <li><a href="admin-events.html"><span class="sidebar-icon">&#9733;</span>Events</a></li>
+                    <li><a href="admin-community.html"><span class="sidebar-icon">&#9776;</span>Community</a></li>
+                    <li><a href="admin-subscribers.html"><span class="sidebar-icon">&#9830;</span>Subscribers</a></li>
+                    <li><a href="admin-audit.html"><span class="sidebar-icon">&#9881;</span>Audit Log</a></li>
+                    <li><a href="admin-settings.html" class="active"><span class="sidebar-icon">&#9881;</span>Settings</a></li>
+                </ul>
+            </aside>
+
+            <!-- ─── MAIN CONTENT ─── -->
+            <div class="admin-content">
+
+                <!-- ─── SITE SETTINGS ─── -->
+                <div class="glass">
+                    <div class="section-title">Site Settings</div>
+
+                    <div class="form-group">
+                        <label for="site-name">Site Name</label>
+                        <input type="text" id="site-name" value="Gay Adventure Friends">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tagline">Tagline</label>
+                        <input type="text" id="tagline" value="Friends Make Life Better">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contact-email">Contact Email</label>
+                        <input type="email" id="contact-email" value="jeffery@gayadventurefriends.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="region">Region</label>
+                        <input type="text" id="region" value="Southern California">
+                    </div>
+
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+
+                <!-- ─── SOCIAL MEDIA ─── -->
+                <div class="glass">
+                    <div class="section-title">Social Media</div>
+
+                    <div class="form-group">
+                        <label for="facebook-url">Facebook Group URL</label>
+                        <input type="url" id="facebook-url" value="https://facebook.com/groups/3140974059506670">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instagram-handle">Instagram Handle</label>
+                        <input type="text" id="instagram-handle" value="@gayadventurefriends">
+                    </div>
+
+                    <button class="btn btn-primary">Save</button>
+                </div>
+
+                <!-- ─── MEMBERSHIP TIERS ─── -->
+                <div class="glass">
+                    <div class="section-title">Membership Tiers</div>
+                    <div style="overflow-x: auto;">
+                        <table class="member-table">
+                            <thead>
+                                <tr>
+                                    <th>Tier</th>
+                                    <th>Price</th>
+                                    <th>Features Count</th>
+                                    <th>Active Members</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="tier-badge tier-basic">Basic</span></td>
+                                    <td>Free</td>
+                                    <td>3 features</td>
+                                    <td>2,104</td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge tier-supporter">Supporter</span></td>
+                                    <td>$29/yr</td>
+                                    <td>6 features</td>
+                                    <td>1,847</td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge tier-frequent">Frequent Flyer</span></td>
+                                    <td>$59/yr</td>
+                                    <td>8 features</td>
+                                    <td>1,205</td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><span class="tier-badge tier-gold">Gold Star</span></td>
+                                    <td>$180/yr</td>
+                                    <td>All features</td>
+                                    <td>558</td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ─── DANGER ZONE ─── -->
+                <div class="glass danger-zone">
+                    <div class="section-title" style="color: #ef4444;">Danger Zone</div>
+
+                    <div class="danger-item">
+                        <div class="danger-item-text">
+                            <strong>Export All Data</strong>
+                            <span>Download a full export of all site data</span>
+                        </div>
+                        <button class="btn btn-outline">Export All Data</button>
+                    </div>
+
+                    <div class="danger-item">
+                        <div class="danger-item-text">
+                            <strong>Purge Expired Listings</strong>
+                            <span>Removes listings older than 90 days</span>
+                        </div>
+                        <button class="btn btn-outline">Purge Expired Listings</button>
+                    </div>
+
+                    <div class="danger-item">
+                        <div class="danger-item-text">
+                            <strong>Maintenance Mode</strong>
+                            <span>Currently OFF</span>
+                        </div>
+                        <button class="btn btn-outline">Toggle Maintenance Mode</button>
+                    </div>
+                </div>
+
+            </div><!-- /admin-content -->
+        </div><!-- /admin-layout -->
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends Admin &copy; 2025</span>
+            <div class="footer-links">
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

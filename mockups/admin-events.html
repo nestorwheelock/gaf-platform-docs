@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events — Admin — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        /* ─── ADMIN SIDEBAR LAYOUT ─── */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 5.5rem;
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+        .sidebar-nav a {
+            display: block;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .sidebar-nav a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .sidebar-nav a.active {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(26, 107, 122, 0.1);
+        }
+        .sidebar-icon {
+            display: inline-block;
+            width: 1.25rem;
+            text-align: center;
+            margin-right: 0.5rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ─── STAT CARDS ─── */
+        .stat-card {
+            text-align: center;
+            padding: 1.25rem 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.375rem;
+        }
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .stat-warning .stat-number { color: var(--warning-text); }
+        .stat-warning { border-left: 3px solid #f59e0b; }
+        .stat-primary .stat-number { color: var(--primary); }
+        .stat-primary { border-left: 3px solid var(--primary); }
+        .stat-success .stat-number { color: var(--success); }
+        .stat-success { border-left: 3px solid var(--success); }
+        .stat-info .stat-number { color: var(--info-text); }
+        .stat-info { border-left: 3px solid #3b82f6; }
+
+        /* ─── SECTION TITLES ─── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* ─── MEMBER TABLE (reused for events) ─── */
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .member-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .member-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .member-table tr:last-child td { border-bottom: none; }
+        .member-table a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .member-table a:hover { text-decoration: underline; }
+
+        /* ─── FILTER TABS ─── */
+        .filter-tabs {
+            display: flex;
+            gap: 0.25rem;
+            background: rgba(0, 0, 0, 0.04);
+            border-radius: 6px;
+            padding: 0.25rem;
+        }
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: none;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s, color 0.15s;
+        }
+        .filter-tab:hover {
+            color: var(--text);
+            background: rgba(0, 0, 0, 0.04);
+        }
+        .filter-tab.active {
+            background: #fff;
+            color: var(--primary-dark);
+            font-weight: 700;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+        }
+
+        /* ─── ACTION BAR ─── */
+        .action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        /* ─── STATUS BADGES ─── */
+        .badge-success {
+            display: inline-block;
+            padding: 0.2rem 0.625rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-warning {
+            display: inline-block;
+            padding: 0.2rem 0.625rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-danger {
+            display: inline-block;
+            padding: 0.2rem 0.625rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .badge-info {
+            display: inline-block;
+            padding: 0.2rem 0.625rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* ─── PAGINATION ─── */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-top: 1.25rem;
+        }
+        .pagination a,
+        .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2rem;
+            height: 2rem;
+            padding: 0 0.5rem;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: background 0.15s, color 0.15s;
+        }
+        .pagination a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .pagination .active {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+        }
+        .pagination .disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 0.25rem;
+            }
+            .sidebar-nav a {
+                white-space: nowrap;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+            .action-bar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .member-table {
+                font-size: 0.75rem;
+            }
+            .member-table th,
+            .member-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Community</a>
+                <a href="contact.html">Contact</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+                <a href="login.html">Login</a>
+                <a href="admin.html" class="active">Admin</a>
+                <a href="join.html" class="btn-join">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="admin-layout">
+
+            <!-- ─── SIDEBAR ─── -->
+            <aside class="glass sidebar" style="padding: 1rem;">
+                <ul class="sidebar-nav">
+                    <li><a href="admin.html"><span class="sidebar-icon">&#9632;</span>Dashboard</a></li>
+                    <li><a href="admin-members.html"><span class="sidebar-icon">&#9775;</span>Members</a></li>
+                    <li><a href="admin-events.html" class="active"><span class="sidebar-icon">&#9733;</span>Events</a></li>
+                    <li><a href="admin-community.html"><span class="sidebar-icon">&#9776;</span>Community</a></li>
+                    <li><a href="admin-subscribers.html"><span class="sidebar-icon">&#9830;</span>Subscribers</a></li>
+                    <li><a href="admin-audit.html"><span class="sidebar-icon">&#9881;</span>Audit Log</a></li>
+                    <li><a href="admin-settings.html"><span class="sidebar-icon">&#9881;</span>Settings</a></li>
+                </ul>
+            </aside>
+
+            <!-- ─── MAIN CONTENT ─── -->
+            <div class="admin-content">
+
+                <!-- ─── ACTION BAR ─── -->
+                <div class="glass" style="margin-bottom: 1.5rem;">
+                    <div class="action-bar">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active">All</button>
+                            <button class="filter-tab">Upcoming</button>
+                            <button class="filter-tab">Past</button>
+                            <button class="filter-tab">Draft</button>
+                        </div>
+                        <a href="#" class="btn btn-cta">Create Event</a>
+                    </div>
+                </div>
+
+                <!-- ─── STATS ROW ─── -->
+                <div class="grid grid-4 mb-3">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Upcoming</div>
+                    </div>
+                    <div class="stat-card stat-info">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">This Month</div>
+                    </div>
+                    <div class="stat-card stat-success">
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">Total RSVPs</div>
+                    </div>
+                    <div class="stat-card stat-warning">
+                        <div class="stat-number">85%</div>
+                        <div class="stat-label">Avg Attendance</div>
+                    </div>
+                </div>
+
+                <!-- ─── EVENTS TABLE ─── -->
+                <div class="glass">
+                    <div class="section-title">Events</div>
+                    <div style="overflow-x: auto;">
+                        <table class="member-table">
+                            <thead>
+                                <tr>
+                                    <th>Event Name</th>
+                                    <th>Date</th>
+                                    <th>Location</th>
+                                    <th>RSVPs</th>
+                                    <th>Capacity</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="event-detail.html">Sunset Cliffs Coastal Hike</a></td>
+                                    <td>Mar 15, 2026</td>
+                                    <td>San Diego</td>
+                                    <td>16/20</td>
+                                    <td>20</td>
+                                    <td><span class="badge-warning">Almost Full</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">Channel Islands Sea Cave Kayak</a></td>
+                                    <td>Mar 22, 2026</td>
+                                    <td>Ventura</td>
+                                    <td>8/12</td>
+                                    <td>12</td>
+                                    <td><span class="badge-success">Open</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">San Diego Bay Sunset Sail</a></td>
+                                    <td>Apr 5, 2026</td>
+                                    <td>San Diego</td>
+                                    <td>5/6</td>
+                                    <td>6</td>
+                                    <td><span class="badge-danger">1 Left</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">Torrey Pines Trail Run</a></td>
+                                    <td>Apr 12, 2026</td>
+                                    <td>San Diego</td>
+                                    <td>3/15</td>
+                                    <td>15</td>
+                                    <td><span class="badge-success">Open</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">Borrego Wildflower Hike</a></td>
+                                    <td>Apr 19, 2026</td>
+                                    <td>Borrego Springs</td>
+                                    <td>0/20</td>
+                                    <td>20</td>
+                                    <td><span class="badge-info">Draft</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">Cooking Night: Thai</a></td>
+                                    <td>May 3, 2026</td>
+                                    <td>Hillcrest</td>
+                                    <td>10/12</td>
+                                    <td>12</td>
+                                    <td><span class="badge-warning">Almost Full</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">La Jolla Cove Kayak</a></td>
+                                    <td>May 10, 2026</td>
+                                    <td>La Jolla</td>
+                                    <td>0/10</td>
+                                    <td>10</td>
+                                    <td><span class="badge-info">Draft</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="event-detail.html">Whale Watching Trip</a></td>
+                                    <td>Jun 1, 2026</td>
+                                    <td>La Paz, MX</td>
+                                    <td>12/16</td>
+                                    <td>16</td>
+                                    <td><span class="badge-success">Open</span></td>
+                                    <td><a href="#">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ─── PAGINATION ─── -->
+                    <div class="pagination">
+                        <a href="#" class="disabled">&laquo; Prev</a>
+                        <span class="active">1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">Next &raquo;</a>
+                    </div>
+                </div>
+
+            </div><!-- /admin-content -->
+        </div><!-- /admin-layout -->
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends Admin &copy; 2025</span>
+            <div class="footer-links">
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

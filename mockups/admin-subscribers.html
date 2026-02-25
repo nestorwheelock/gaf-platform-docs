@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribers — Admin — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        /* ─── ADMIN SIDEBAR LAYOUT ─── */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 5.5rem;
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+        .sidebar-nav a {
+            display: block;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .sidebar-nav a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .sidebar-nav a.active {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(26, 107, 122, 0.1);
+        }
+        .sidebar-icon {
+            display: inline-block;
+            width: 1.25rem;
+            text-align: center;
+            margin-right: 0.5rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ─── STAT CARDS ─── */
+        .stat-card {
+            text-align: center;
+            padding: 1.25rem 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.375rem;
+        }
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .stat-warning .stat-number { color: var(--warning-text); }
+        .stat-warning { border-left: 3px solid #f59e0b; }
+        .stat-primary .stat-number { color: var(--primary); }
+        .stat-primary { border-left: 3px solid var(--primary); }
+        .stat-success .stat-number { color: var(--success); }
+        .stat-success { border-left: 3px solid var(--success); }
+        .stat-info .stat-number { color: var(--info-text); }
+        .stat-info { border-left: 3px solid #3b82f6; }
+
+        /* ─── SECTION TITLES ─── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* ─── REVENUE CARD ─── */
+        .revenue-card {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #fff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .revenue-card h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+        .revenue-amount {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .revenue-detail {
+            font-size: 0.8125rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+        .revenue-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        /* ─── CHURN INDICATOR ─── */
+        .churn-card {
+            background: #fff;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .churn-card h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .churn-rate {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--success);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        .churn-detail {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ─── TIER BREAKDOWN ─── */
+        .tier-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .tier-row:last-child { border-bottom: none; }
+        .tier-bar-wrap {
+            flex: 1;
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .tier-bar {
+            height: 100%;
+            border-radius: 4px;
+        }
+        .tier-bar-gold { background: linear-gradient(90deg, #fbbf24, #e87d3a); }
+        .tier-bar-frequent { background: linear-gradient(90deg, #2a9db3, #1a6b7a); }
+        .tier-bar-supporter { background: linear-gradient(90deg, #93c5fd, #3b82f6); }
+        .tier-bar-basic { background: #9ca3af; }
+        .tier-name { width: 110px; font-size: 0.8125rem; font-weight: 600; }
+        .tier-count { width: 60px; text-align: right; font-size: 0.8125rem; color: var(--text-muted); }
+        .tier-revenue { width: 80px; text-align: right; font-size: 0.8125rem; font-weight: 600; color: var(--primary); }
+
+        /* ─── SUBSCRIBER TABLE ─── */
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .member-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .member-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .member-table tr:last-child td { border-bottom: none; }
+        .member-table a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .member-table a:hover { text-decoration: underline; }
+        .tier-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tier-gold { background: #fef3c7; color: #92400e; }
+        .tier-frequent { background: #dbeafe; color: #1e40af; }
+        .tier-supporter { background: #e0f2f1; color: var(--primary-dark); }
+        .tier-basic { background: #f3f4f6; color: #6b7280; }
+
+        /* ─── FILTER BAR ─── */
+        .filter-bar {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+        .filter-bar select,
+        .filter-bar input[type="text"] {
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.8125rem;
+            background: #fff;
+        }
+        .filter-bar input[type="text"] { flex: 1; min-width: 180px; }
+
+        /* ─── PAGINATION ─── */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.25rem;
+            margin-top: 1.25rem;
+            font-size: 0.8125rem;
+        }
+        .pagination a, .pagination span {
+            padding: 0.375rem 0.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .pagination a:hover { background: rgba(26, 107, 122, 0.08); }
+        .pagination .active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+        .pagination .disabled {
+            color: var(--text-muted);
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .admin-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .sidebar-nav { flex-direction: row; overflow-x: auto; gap: 0.25rem; }
+            .sidebar-nav a { white-space: nowrap; padding: 0.5rem 0.75rem; font-size: 0.8125rem; }
+            .revenue-grid { grid-template-columns: 1fr; }
+            .member-table { font-size: 0.75rem; }
+            .member-table th, .member-table td { padding: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Community</a>
+                <a href="contact.html">Contact</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+                <a href="login.html">Login</a>
+                <a href="admin.html" class="active">Admin</a>
+                <a href="join.html" class="btn-join">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="admin-layout">
+
+            <!-- ─── SIDEBAR ─── -->
+            <aside class="glass sidebar" style="padding: 1rem;">
+                <ul class="sidebar-nav">
+                    <li><a href="admin.html"><span class="sidebar-icon">&#9632;</span>Dashboard</a></li>
+                    <li><a href="admin-members.html"><span class="sidebar-icon">&#9775;</span>Members</a></li>
+                    <li><a href="admin-events.html"><span class="sidebar-icon">&#9733;</span>Events</a></li>
+                    <li><a href="admin-community.html"><span class="sidebar-icon">&#9776;</span>Community</a></li>
+                    <li><a href="admin-subscribers.html" class="active"><span class="sidebar-icon">&#9830;</span>Subscribers</a></li>
+                    <li><a href="admin-audit.html"><span class="sidebar-icon">&#9881;</span>Audit Log</a></li>
+                    <li><a href="admin-settings.html"><span class="sidebar-icon">&#9881;</span>Settings</a></li>
+                </ul>
+            </aside>
+
+            <!-- ─── MAIN CONTENT ─── -->
+            <div class="admin-content">
+
+                <!-- ─── REVENUE + CHURN ─── -->
+                <div class="revenue-grid mb-3">
+                    <div class="revenue-card">
+                        <h3>Monthly Recurring Revenue</h3>
+                        <div class="revenue-amount">$14,847</div>
+                        <div class="revenue-detail">
+                            +$1,230 vs last month (+9.0%)<br>
+                            Annual run rate: $178,164
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="churn-card" style="margin-bottom: 0;">
+                            <h3>Monthly Churn Rate</h3>
+                            <div class="churn-rate">2.1%</div>
+                            <div class="churn-detail">
+                                76 cancellations this month<br>
+                                Down from 2.8% last month
+                            </div>
+                        </div>
+                        <div class="churn-card" style="margin-bottom: 0;">
+                            <h3>Net New Subscribers</h3>
+                            <div class="churn-rate" style="color: var(--primary);">+134</div>
+                            <div class="churn-detail">
+                                210 new &minus; 76 cancelled<br>
+                                Growth rate: 3.7%/mo
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── STATS ROW ─── -->
+                <div class="grid grid-4 mb-3">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-number">3,610</div>
+                        <div class="stat-label">Paid Subscribers</div>
+                    </div>
+                    <div class="stat-card stat-success">
+                        <div class="stat-number">558</div>
+                        <div class="stat-label">Gold Star</div>
+                    </div>
+                    <div class="stat-card stat-info">
+                        <div class="stat-number">1,205</div>
+                        <div class="stat-label">Frequent Flyer</div>
+                    </div>
+                    <div class="stat-card stat-warning">
+                        <div class="stat-number">1,847</div>
+                        <div class="stat-label">Supporter</div>
+                    </div>
+                </div>
+
+                <!-- ─── TIER BREAKDOWN ─── -->
+                <div class="glass mb-3">
+                    <div class="section-title">Revenue by Tier</div>
+                    <div class="tier-row">
+                        <div class="tier-name"><span class="tier-badge tier-gold">Gold Star</span></div>
+                        <div class="tier-bar-wrap"><div class="tier-bar tier-bar-gold" style="width: 56%;"></div></div>
+                        <div class="tier-count">558</div>
+                        <div class="tier-revenue">$8,370/mo</div>
+                    </div>
+                    <div class="tier-row">
+                        <div class="tier-name"><span class="tier-badge tier-frequent">Frequent Flyer</span></div>
+                        <div class="tier-bar-wrap"><div class="tier-bar tier-bar-frequent" style="width: 40%;"></div></div>
+                        <div class="tier-count">1,205</div>
+                        <div class="tier-revenue">$5,925/mo</div>
+                    </div>
+                    <div class="tier-row">
+                        <div class="tier-name"><span class="tier-badge tier-supporter">Supporter</span></div>
+                        <div class="tier-bar-wrap"><div class="tier-bar tier-bar-supporter" style="width: 3%;"></div></div>
+                        <div class="tier-count">1,847</div>
+                        <div class="tier-revenue">$4,464/mo</div>
+                    </div>
+                    <div class="tier-row">
+                        <div class="tier-name"><span class="tier-badge tier-basic">Basic (Free)</span></div>
+                        <div class="tier-bar-wrap"><div class="tier-bar tier-bar-basic" style="width: 0%;"></div></div>
+                        <div class="tier-count">2,104</div>
+                        <div class="tier-revenue">$0</div>
+                    </div>
+                </div>
+
+                <!-- ─── SUBSCRIBER LIST ─── -->
+                <div class="glass">
+                    <div class="section-title">Subscribers</div>
+
+                    <div class="filter-bar">
+                        <input type="text" placeholder="Search subscribers...">
+                        <select>
+                            <option>All Tiers</option>
+                            <option>Gold Star</option>
+                            <option>Frequent Flyer</option>
+                            <option>Supporter</option>
+                        </select>
+                        <select>
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Past Due</option>
+                            <option>Cancelled</option>
+                        </select>
+                        <button class="btn btn-primary btn-sm">Search</button>
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table class="member-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Tier</th>
+                                    <th>Amount</th>
+                                    <th>Since</th>
+                                    <th>Next Billing</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="profile-jeffrey.html">Jeffrey L.</a></td>
+                                    <td><span class="tier-badge tier-gold">Gold Star</span></td>
+                                    <td>$180/yr</td>
+                                    <td>Mar 2015</td>
+                                    <td>Mar 15, 2027</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-david.html">David R.</a></td>
+                                    <td><span class="tier-badge tier-gold">Gold Star</span></td>
+                                    <td>$180/yr</td>
+                                    <td>Aug 2018</td>
+                                    <td>Aug 1, 2026</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-mark.html">Mark S.</a></td>
+                                    <td><span class="tier-badge tier-gold">Gold Star</span></td>
+                                    <td>$180/yr</td>
+                                    <td>Jan 2020</td>
+                                    <td>Jan 15, 2027</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-alex.html">Alex M.</a></td>
+                                    <td><span class="tier-badge tier-frequent">Frequent Flyer</span></td>
+                                    <td>$59/yr</td>
+                                    <td>Jun 2019</td>
+                                    <td>Jun 10, 2026</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-jason.html">Jason L.</a></td>
+                                    <td><span class="tier-badge tier-frequent">Frequent Flyer</span></td>
+                                    <td>$59/yr</td>
+                                    <td>May 2020</td>
+                                    <td>May 22, 2026</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-carlos.html">Carlos M.</a></td>
+                                    <td><span class="tier-badge tier-frequent">Frequent Flyer</span></td>
+                                    <td>$59/yr</td>
+                                    <td>Apr 2020</td>
+                                    <td>Apr 8, 2026</td>
+                                    <td><span class="badge badge-warning">Past Due</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a> <a href="#" class="btn btn-danger btn-xs">Cancel</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-chris.html">Chris T.</a></td>
+                                    <td><span class="tier-badge tier-supporter">Supporter</span></td>
+                                    <td>$29/yr</td>
+                                    <td>Mar 2021</td>
+                                    <td>Mar 5, 2027</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-kevin.html">Kevin P.</a></td>
+                                    <td><span class="tier-badge tier-supporter">Supporter</span></td>
+                                    <td>$29/yr</td>
+                                    <td>Jul 2022</td>
+                                    <td>Jul 14, 2026</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-miguel.html">Miguel S.</a></td>
+                                    <td><span class="tier-badge tier-supporter">Supporter</span></td>
+                                    <td>$29/yr</td>
+                                    <td>Nov 2021</td>
+                                    <td>Nov 1, 2026</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-ryan.html">Ryan T.</a></td>
+                                    <td><span class="tier-badge tier-basic">Basic</span></td>
+                                    <td>Free</td>
+                                    <td>Feb 2026</td>
+                                    <td>&mdash;</td>
+                                    <td><span class="badge badge-info">Free</span></td>
+                                    <td><a href="#" class="btn btn-outline btn-xs">Edit</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="pagination">
+                        <span class="disabled">&laquo; Prev</span>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <span>...</span>
+                        <a href="#">361</a>
+                        <a href="#">Next &raquo;</a>
+                    </div>
+                </div>
+
+            </div><!-- /admin-content -->
+        </div><!-- /admin-layout -->
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends Admin &copy; 2025</span>
+            <div class="footer-links">
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Log — Admin — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        /* ─── ADMIN SIDEBAR LAYOUT ─── */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 5.5rem;
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+        .sidebar-nav a {
+            display: block;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .sidebar-nav a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .sidebar-nav a.active {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(26, 107, 122, 0.1);
+        }
+        .sidebar-icon {
+            display: inline-block;
+            width: 1.25rem;
+            text-align: center;
+            margin-right: 0.5rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ─── STAT CARDS ─── */
+        .stat-card {
+            text-align: center;
+            padding: 1.25rem 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.375rem;
+        }
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .stat-warning .stat-number { color: var(--warning-text); }
+        .stat-warning { border-left: 3px solid #f59e0b; }
+        .stat-primary .stat-number { color: var(--primary); }
+        .stat-primary { border-left: 3px solid var(--primary); }
+        .stat-success .stat-number { color: var(--success); }
+        .stat-success { border-left: 3px solid var(--success); }
+        .stat-info .stat-number { color: var(--info-text); }
+        .stat-info { border-left: 3px solid #3b82f6; }
+
+        /* ─── SECTION TITLES ─── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* ─── AUDIT LOG ─── */
+        .log-entry {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+        }
+        .log-entry:last-child { border-bottom: none; }
+        .log-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.375rem;
+        }
+        .log-dot-green { background: var(--success); }
+        .log-dot-blue { background: #3b82f6; }
+        .log-dot-gray { background: #9ca3af; }
+        .log-dot-orange { background: var(--accent); }
+        .log-dot-yellow { background: #eab308; }
+        .log-text { flex: 1; color: var(--text); line-height: 1.5; }
+        .log-text strong { font-weight: 600; }
+        .log-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ─── FILTER BAR ─── */
+        .filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        .filter-group label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .filter-group input,
+        .filter-group select {
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--text);
+            min-width: 140px;
+        }
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 107, 122, 0.15);
+        }
+
+        /* ─── PAGINATION ─── */
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.25rem;
+            padding: 1.25rem 0 0.5rem;
+        }
+        .pagination a,
+        .pagination span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 2rem;
+            height: 2rem;
+            padding: 0 0.5rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            transition: background 0.15s, color 0.15s;
+        }
+        .pagination a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .pagination .active {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 700;
+        }
+        .pagination .ellipsis {
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 0.25rem;
+            }
+            .sidebar-nav a {
+                white-space: nowrap;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .filter-group input,
+            .filter-group select {
+                min-width: unset;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Community</a>
+                <a href="contact.html">Contact</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+                <a href="login.html">Login</a>
+                <a href="admin.html">Admin</a>
+                <a href="join.html" class="btn-join">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="admin-layout">
+
+            <!-- ─── SIDEBAR ─── -->
+            <aside class="glass sidebar" style="padding: 1rem;">
+                <ul class="sidebar-nav">
+                    <li><a href="admin.html"><span class="sidebar-icon">&#9632;</span>Dashboard</a></li>
+                    <li><a href="admin-members.html"><span class="sidebar-icon">&#9775;</span>Members</a></li>
+                    <li><a href="admin-events.html"><span class="sidebar-icon">&#9733;</span>Events</a></li>
+                    <li><a href="admin-community.html"><span class="sidebar-icon">&#9776;</span>Community</a></li>
+                    <li><a href="admin-subscribers.html"><span class="sidebar-icon">&#9830;</span>Subscribers</a></li>
+                    <li><a href="admin-audit.html" class="active"><span class="sidebar-icon">&#9881;</span>Audit Log</a></li>
+                    <li><a href="admin-settings.html"><span class="sidebar-icon">&#9881;</span>Settings</a></li>
+                </ul>
+            </aside>
+
+            <!-- ─── MAIN CONTENT ─── -->
+            <div class="admin-content">
+
+                <!-- ─── FILTER BAR ─── -->
+                <div class="glass">
+                    <div class="section-title">Audit Log</div>
+                    <div class="filter-bar">
+                        <div class="filter-group">
+                            <label for="filter-from">From</label>
+                            <input type="date" id="filter-from" value="2026-01-01">
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-to">To</label>
+                            <input type="date" id="filter-to" value="2026-02-25">
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-action">Action Type</label>
+                            <select id="filter-action">
+                                <option value="all">All</option>
+                                <option value="auth">Auth</option>
+                                <option value="content">Content</option>
+                                <option value="admin">Admin</option>
+                                <option value="system">System</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-actor">Actor</label>
+                            <select id="filter-actor">
+                                <option value="all">All</option>
+                                <option value="jeffrey">Jeffrey L.</option>
+                                <option value="alex">Alex M.</option>
+                                <option value="system">System</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-primary">Filter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── STATS ROW ─── -->
+                <div class="grid grid-4 mb-3">
+                    <div class="stat-card stat-primary">
+                        <div class="stat-number">2,847</div>
+                        <div class="stat-label">Total Events</div>
+                    </div>
+                    <div class="stat-card stat-info">
+                        <div class="stat-number">34</div>
+                        <div class="stat-label">Today</div>
+                    </div>
+                    <div class="stat-card stat-success">
+                        <div class="stat-number">12</div>
+                        <div class="stat-label">Auth Events</div>
+                    </div>
+                    <div class="stat-card stat-warning">
+                        <div class="stat-number">18</div>
+                        <div class="stat-label">Content Changes</div>
+                    </div>
+                </div>
+
+                <!-- ─── AUDIT LOG ENTRIES ─── -->
+                <div class="glass">
+                    <div class="section-title">Activity Log</div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-green"></span>
+                        <div class="log-text"><strong>Jeffrey L.</strong> approved listing &ldquo;Dog Walking&rdquo;</div>
+                        <span class="log-time">1 hour ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-blue"></span>
+                        <div class="log-text"><strong>Mark S.</strong> registered via Facebook OAuth</div>
+                        <span class="log-time">3 hours ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-gray"></span>
+                        <div class="log-text"><strong>System</strong> expired 3 listings</div>
+                        <span class="log-time">6 hours ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-orange"></span>
+                        <div class="log-text"><strong>Jeffrey L.</strong> created event &ldquo;Sunset Cliffs Coastal Hike&rdquo;</div>
+                        <span class="log-time">1 day ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-yellow"></span>
+                        <div class="log-text"><strong>Alex M.</strong> signed liability waiver</div>
+                        <span class="log-time">1 day ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-blue"></span>
+                        <div class="log-text"><strong>Ryan T.</strong> registered via email</div>
+                        <span class="log-time">1 day ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-green"></span>
+                        <div class="log-text"><strong>Jeffrey L.</strong> approved listing &ldquo;Studio Sublease&rdquo;</div>
+                        <span class="log-time">2 days ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-orange"></span>
+                        <div class="log-text"><strong>Chris T.</strong> updated profile</div>
+                        <span class="log-time">2 days ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-gray"></span>
+                        <div class="log-text"><strong>System</strong> sent 47 event reminder emails</div>
+                        <span class="log-time">2 days ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-green"></span>
+                        <div class="log-text"><strong>Jeffrey L.</strong> promoted Mark S. to Gold Star</div>
+                        <span class="log-time">3 days ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-blue"></span>
+                        <div class="log-text"><strong>Kevin P.</strong> logged in via Facebook</div>
+                        <span class="log-time">3 days ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-gray"></span>
+                        <div class="log-text"><strong>System</strong> completed nightly backup</div>
+                        <span class="log-time">3 days ago</span>
+                    </div>
+
+                    <!-- ─── PAGINATION ─── -->
+                    <div class="pagination">
+                        <a href="#">&laquo; Prev</a>
+                        <a href="#" class="active">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <span class="ellipsis">&hellip;</span>
+                        <a href="#">285</a>
+                        <a href="#">Next &raquo;</a>
+                    </div>
+                </div>
+
+            </div><!-- /admin-content -->
+        </div><!-- /admin-layout -->
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends Admin &copy; 2025</span>
+            <div class="footer-links">
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>
