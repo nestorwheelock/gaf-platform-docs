@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP — Sunset Cliffs Coastal Hike — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .rsvp-container { max-width: 48rem; margin: 0 auto; }
+
+        /* ─── PROGRESS STEPS ─── */
+        .progress-steps { display: flex; gap: 0; margin-bottom: 2rem; }
+        .step {
+            flex: 1; text-align: center; position: relative;
+            font-size: 0.75rem; font-weight: 600; color: var(--text-muted); padding-top: 1.75rem;
+        }
+        .step::before {
+            content: attr(data-num);
+            width: 28px; height: 28px; border-radius: 50%; background: var(--border);
+            color: var(--text-muted); display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; font-weight: 700; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+        }
+        .step.active::before { background: var(--primary); color: #fff; }
+        .step.active { color: var(--primary-dark); }
+        .step.done::before { background: var(--success); color: #fff; content: "\2713"; }
+        .step.done { color: var(--success); }
+        .step:not(:last-child)::after {
+            content: ""; position: absolute; top: 13px; left: calc(50% + 18px);
+            width: calc(100% - 36px); height: 2px; background: var(--border);
+        }
+        .step.done:not(:last-child)::after { background: var(--success); }
+
+        /* ─── EVENT CARD ─── */
+        .rsvp-event {
+            display: flex; gap: 1.25rem; padding: 1.25rem;
+            background: var(--info-bg); border-radius: 0.5rem; margin-bottom: 1.5rem; align-items: center;
+        }
+        .rsvp-event-img { width: 100px; height: 100px; border-radius: 0.5rem; object-fit: cover; flex-shrink: 0; }
+        .rsvp-event-date { text-align: center; flex-shrink: 0; width: 50px; }
+        .rsvp-event-date .month { font-size: 0.6875rem; text-transform: uppercase; font-weight: 600; color: var(--accent); letter-spacing: 0.05em; }
+        .rsvp-event-date .day { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); line-height: 1; }
+        .rsvp-event-info h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.25rem; }
+        .rsvp-event-info p { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.5; }
+        .rsvp-event-spots { flex-shrink: 0; text-align: center; }
+        .rsvp-event-spots .num { font-size: 1.5rem; font-weight: 800; color: var(--accent); }
+        .rsvp-event-spots .lbl { font-size: 0.6875rem; color: var(--text-muted); }
+
+        /* ─── SECTIONS ─── */
+        .section-label {
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 0.75rem;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-group { margin-bottom: 0; }
+        .form-group label { margin-bottom: 0.375rem; }
+
+        /* ─── WAIVER TEXT ─── */
+        .waiver-text {
+            background: #fff; border: 1px solid var(--border); border-radius: 0.5rem;
+            padding: 1.5rem; max-height: 260px; overflow-y: auto;
+            font-size: 0.8125rem; line-height: 1.75; color: var(--text); margin-bottom: 1.5rem;
+        }
+        .waiver-text h4 { font-size: 0.875rem; color: var(--primary-dark); margin-top: 1rem; margin-bottom: 0.375rem; }
+        .waiver-text h4:first-child { margin-top: 0; }
+        .waiver-text p { margin-bottom: 0.75rem; }
+
+        /* ─── SIGNATURE ─── */
+        .sig-section { margin-bottom: 1.5rem; }
+        .sig-section label { display: block; font-size: 0.8125rem; font-weight: 600; color: var(--text); margin-bottom: 0.5rem; }
+        .sig-canvas-wrap {
+            border: 2px dashed var(--border); border-radius: 0.5rem;
+            background: #fff; position: relative; overflow: hidden;
+        }
+        .sig-canvas-wrap:focus-within { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26, 107, 122, 0.1); }
+        .sig-canvas { width: 100%; height: 140px; display: block; cursor: crosshair; }
+        .sig-canvas-placeholder {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 0.8125rem; color: var(--text-muted); pointer-events: none; transition: opacity 0.2s;
+        }
+        .sig-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 0.5rem; }
+
+        /* ─── CHECKBOXES ─── */
+        .checkbox-row { display: flex; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; }
+        .checkbox-row input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--primary); }
+        .checkbox-row label { font-size: 0.8125rem; font-weight: 400; color: var(--text); line-height: 1.5; margin-bottom: 0; }
+        .checkbox-row label strong { color: var(--primary-dark); }
+
+        /* ─── ACCEPT ALL ─── */
+        .accept-all-bar {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: #fff; border-radius: 0.5rem; padding: 1rem 1.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 1.5rem; flex-wrap: wrap; gap: 0.75rem;
+        }
+        .accept-all-bar span { font-size: 0.875rem; font-weight: 600; }
+        .accept-all-btn {
+            background: var(--accent); color: var(--primary-dark); border: none;
+            padding: 0.5rem 1.25rem; border-radius: 6px; font-size: 0.8125rem;
+            font-weight: 700; cursor: pointer; transition: background 0.2s;
+        }
+        .accept-all-btn:hover { background: #f59e0b; }
+
+        /* ─── SUBMIT ─── */
+        .submit-row {
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); flex-wrap: wrap;
+        }
+        .device-info { font-size: 0.6875rem; color: var(--text-muted); line-height: 1.5; }
+        .device-info strong { color: var(--text); }
+
+        /* ─── EMERGENCY CONTACT ─── */
+        .emergency-note {
+            background: #fef3c7; border-left: 4px solid #f59e0b;
+            border-radius: 0 0.5rem 0.5rem 0; padding: 0.75rem 1rem;
+            font-size: 0.8125rem; color: #92400e; margin-bottom: 1.5rem; line-height: 1.5;
+        }
+
+        .divider {
+            border: none; border-top: 1px solid var(--border); margin: 1.5rem 0;
+        }
+
+        @media (max-width: 640px) {
+            .form-row { grid-template-columns: 1fr; }
+            .rsvp-event { flex-direction: column; text-align: center; }
+            .rsvp-event-img { width: 100%; height: 160px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="home.html">About</a>
+                <a href="events.html" class="active">Events</a>
+                <a href="listings.html">Community</a>
+                <a href="contact.html">Contact</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+                <a href="login.html">Login</a>
+                <a href="admin.html">Admin</a>
+                <a href="join.html" class="btn-join">Join</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="rsvp-container">
+            <div class="glass">
+
+                <a href="event-detail.html" style="font-size: 0.8125rem; color: var(--primary); text-decoration: none; display: inline-block; margin-bottom: 1rem;">&larr; Back to Event</a>
+
+                <div class="progress-steps">
+                    <div class="step done" data-num="1">Event</div>
+                    <div class="step active" data-num="2">RSVP &amp; Waiver</div>
+                    <div class="step" data-num="3">Confirmed</div>
+                </div>
+
+                <!-- ─── EVENT SUMMARY ─── -->
+                <div class="rsvp-event">
+                    <img src="../assets/images/hiking.jpg" alt="Sunset Cliffs Coastal Hike" class="rsvp-event-img">
+                    <div class="rsvp-event-date">
+                        <div class="month">Mar</div>
+                        <div class="day">15</div>
+                    </div>
+                    <div class="rsvp-event-info">
+                        <h3>Sunset Cliffs Coastal Hike</h3>
+                        <p>Saturday, March 15, 2026 &middot; 8:00 AM<br>Sunset Cliffs Natural Park, San Diego</p>
+                        <p>Led by <a href="profile-jeffrey.html" style="color:var(--primary);">Jeffrey L.</a></p>
+                    </div>
+                    <div class="rsvp-event-spots">
+                        <div class="num">4</div>
+                        <div class="lbl">spots left</div>
+                    </div>
+                </div>
+
+                <!-- ─── RSVP DETAILS ─── -->
+                <div class="section-label">Your Information</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" value="Jeffrey Lehmann" readonly style="background:var(--sand);">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" value="jeffery@gayadventurefriends.com" readonly style="background:var(--sand);">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" placeholder="(619) 555-0142">
+                    </div>
+                    <div class="form-group">
+                        <label>Membership Tier</label>
+                        <input type="text" value="Gold Star" readonly style="background:var(--sand);">
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- ─── EMERGENCY CONTACT ─── -->
+                <div class="section-label">Emergency Contact</div>
+                <div class="emergency-note">
+                    Required for all outdoor adventures. This information is only shared with trip leaders in case of emergency.
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Emergency Contact Name</label>
+                        <input type="text" placeholder="Full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Relationship</label>
+                        <select>
+                            <option value="" disabled selected>Select...</option>
+                            <option>Partner / Spouse</option>
+                            <option>Friend</option>
+                            <option>Parent</option>
+                            <option>Sibling</option>
+                            <option>Other Family</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row" style="margin-bottom: 1.5rem;">
+                    <div class="form-group">
+                        <label>Emergency Phone</label>
+                        <input type="tel" placeholder="(555) 555-0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Any Medical Conditions?</label>
+                        <input type="text" placeholder="Allergies, medications, etc. (optional)">
+                    </div>
+                </div>
+
+                <hr class="divider">
+
+                <!-- ─── LIABILITY WAIVER ─── -->
+                <div class="section-label">Liability Waiver &amp; Image Release</div>
+
+                <div class="waiver-text">
+                    <h4>Liability Release</h4>
+                    <p>By participating with Gay Adventure Friends, you understand and realize that participation in events and activities could include actions or tasks which might be dangerous to you. You must always assess each activity and your ability to participate. You must not participate if you feel you are not able to do so safely. Adventure activities are inherently dangerous.</p>
+                    <p>You agree to the fact that participation can cause possible harm or injury to you. You release Jeffrey Lehmann, any additional organizers, or fellow participants from all liability, costs, and damages which could arise from participation in any and all events and activities. You agree to accept financial responsibility for the costs related to any and all medical treatments, emergency treatments, or any other related costs when registering and/or participating.</p>
+                    <p>Please seriously consider purchasing insurance to cover any incurred costs in every possible situation that may arise due to your participation including but not limited to travel insurance and emergency medical evacuation and medical treatment.</p>
+                    <p>If you do not agree to this release, do not register or participate in Gay Adventure Friends events or any related activities. In addition, you may be asked to sign additional releases (either electronically or in person) before or while participating in some events by Gay Adventure Friends or companies offering activities like whitewater rafting, boating, kayaking, caving, rock climbing etc.</p>
+
+                    <h4>Image Release</h4>
+                    <p>I hereby grant permission to Jeffrey Lehmann, Gay Adventure Friends, and any associated entity any and all of the foregoing to use any photograph, video, or other record of my image for any purpose whatsoever, including (but not limited to) telecasts, universal electronic mediums (ie. streaming services, mobile devices, and the internet), printed material and the press.</p>
+
+                    <h4>Acknowledgement</h4>
+                    <p>I have read this agreement and by participating with Gay Adventure Friends I understand its terms and that I have given up substantial rights by agreeing to this and have agreed to it freely and without inducement or assurance of any nature and intend it to be a complete and unconditional release of all liability to the greatest extent allowed by law. I also agree that if any portion of this agreement is held to be invalid the balance, notwithstanding, shall continue in full force and effect.</p>
+
+                    <h4>Duration</h4>
+                    <p>This waiver is valid for one (1) year from the date of signing and applies to all GAF-organized activities during that period. A new waiver must be signed upon expiration.</p>
+                </div>
+
+                <!-- ─── ACCEPT ALL ─── -->
+                <div class="accept-all-bar">
+                    <span>Check all legal acknowledgements below</span>
+                    <button class="accept-all-btn" id="acceptAllBtn">Accept All</button>
+                </div>
+
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree1" class="legal-check">
+                    <label for="agree1">I have <strong>read and understand</strong> the liability release above and voluntarily assume all risks.</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree2" class="legal-check">
+                    <label for="agree2">I <strong>grant permission</strong> for my image to be used by Gay Adventure Friends as described above.</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree3" class="legal-check">
+                    <label for="agree3">I understand this waiver is <strong>valid for one year</strong> and covers all GAF events during that period.</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="agree4" class="legal-check">
+                    <label for="agree4">I confirm my <strong>emergency contact information</strong> above is accurate and up to date.</label>
+                </div>
+
+                <hr class="divider">
+
+                <!-- ─── SIGNATURE ─── -->
+                <div class="sig-section">
+                    <div class="form-row" style="margin-bottom: 1rem;">
+                        <div class="form-group">
+                            <label>Full Legal Name</label>
+                            <input type="text" value="Jeffrey Lehmann" readonly style="background:var(--sand);">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="text" value="February 25, 2026" readonly style="background:var(--sand);">
+                        </div>
+                    </div>
+
+                    <label>Digital Signature &mdash; Draw your signature below</label>
+                    <div class="sig-canvas-wrap">
+                        <canvas class="sig-canvas" id="sigCanvas"></canvas>
+                        <div class="sig-canvas-placeholder" id="sigPlaceholder">Sign here with your mouse or finger</div>
+                    </div>
+                    <div class="sig-actions">
+                        <button class="btn btn-secondary-outline btn-xs" id="sigClear">Clear</button>
+                    </div>
+                </div>
+
+                <!-- ─── SUBMIT ─── -->
+                <div class="submit-row">
+                    <div class="device-info">
+                        <strong>IP:</strong> 72.134.xxx.xxx<br>
+                        <strong>Device:</strong> Chrome 122 / macOS<br>
+                        <strong>Timestamp:</strong> 2026-02-25T14:32:08Z
+                    </div>
+                    <div style="display:flex; gap:0.75rem;">
+                        <a href="event-detail.html" class="btn btn-secondary-outline btn-sm">Cancel</a>
+                        <button class="btn btn-cta" id="submitBtn" style="padding: 0.75rem 2rem;">RSVP &amp; Sign Waiver</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="home.html">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+    <script>
+        // ─── Accept All Button ───
+        document.getElementById('acceptAllBtn').addEventListener('click', function() {
+            document.querySelectorAll('.legal-check').forEach(function(cb) {
+                cb.checked = true;
+            });
+            this.textContent = 'All Accepted';
+            this.style.background = '#22c55e';
+            this.style.color = '#fff';
+        });
+
+        // ─── Signature Pad ───
+        const canvas = document.getElementById('sigCanvas');
+        const ctx = canvas.getContext('2d');
+        const placeholder = document.getElementById('sigPlaceholder');
+        let drawing = false;
+        let hasSignature = false;
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            ctx.strokeStyle = '#0f4a55';
+            ctx.lineWidth = 2.5;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        function getPos(e) {
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches ? e.touches[0] : e;
+            return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+        }
+
+        function startDraw(e) {
+            e.preventDefault();
+            drawing = true;
+            hasSignature = true;
+            placeholder.style.opacity = '0';
+            const pos = getPos(e);
+            ctx.beginPath();
+            ctx.moveTo(pos.x, pos.y);
+        }
+
+        function draw(e) {
+            if (!drawing) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+        }
+
+        function stopDraw() { drawing = false; }
+
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDraw);
+        canvas.addEventListener('mouseleave', stopDraw);
+        canvas.addEventListener('touchstart', startDraw);
+        canvas.addEventListener('touchmove', draw);
+        canvas.addEventListener('touchend', stopDraw);
+
+        document.getElementById('sigClear').addEventListener('click', function() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hasSignature = false;
+            placeholder.style.opacity = '1';
+        });
+
+        // ─── Submit Validation ───
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            var checks = document.querySelectorAll('.legal-check');
+            var allChecked = true;
+            checks.forEach(function(cb) { if (!cb.checked) allChecked = false; });
+
+            if (!allChecked) {
+                alert('Please accept all legal acknowledgements above.');
+                return;
+            }
+            if (!hasSignature) {
+                alert('Please draw your signature above.');
+                return;
+            }
+            alert('RSVP confirmed! Your waiver has been signed and your spot is reserved.\n\nYou will receive a confirmation email shortly.');
+        });
+    </script>
+</body>
+</html>
