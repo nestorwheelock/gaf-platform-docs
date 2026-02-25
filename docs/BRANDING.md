@@ -27,13 +27,13 @@ Every color in the palette was pulled from real GAF adventure photos. The site f
 
 | | Dark | Base | Light | Family |
 |---|---|---|---|---|
-| **Ocean Teal** | ![](https://via.placeholder.com/40/0f4a55/0f4a55.png) `#0f4a55` | ![](https://via.placeholder.com/40/1a6b7a/1a6b7a.png) `#1a6b7a` | ![](https://via.placeholder.com/40/2a9db3/2a9db3.png) `#2a9db3` | Primary |
-| **Sunset Warm** | ![](https://via.placeholder.com/40/c45e20/c45e20.png) `#c45e20` | ![](https://via.placeholder.com/40/e87d3a/e87d3a.png) `#e87d3a` | ![](https://via.placeholder.com/40/f4a66c/f4a66c.png) `#f4a66c` | Secondary |
-| **Golden Hour** | ![](https://via.placeholder.com/40/c49a20/c49a20.png) `#c49a20` | ![](https://via.placeholder.com/40/e8c040/e8c040.png) `#e8c040` | ![](https://via.placeholder.com/40/f5d870/f5d870.png) `#f5d870` | Accent |
-| **Sandstone** | ![](https://via.placeholder.com/40/8a6540/8a6540.png) `#8a6540` | ![](https://via.placeholder.com/40/c4956a/c4956a.png) `#c4956a` | ![](https://via.placeholder.com/40/e0c4a0/e0c4a0.png) `#e0c4a0` | Earth |
-| **SoCal Blue** | ![](https://via.placeholder.com/40/2a5a8a/2a5a8a.png) `#2a5a8a` | ![](https://via.placeholder.com/40/4a88c8/4a88c8.png) `#4a88c8` | ![](https://via.placeholder.com/40/7ab0e8/7ab0e8.png) `#7ab0e8` | Sky |
-| **Sage Green** | ![](https://via.placeholder.com/40/3a5a32/3a5a32.png) `#3a5a32` | ![](https://via.placeholder.com/40/5a7a50/5a7a50.png) `#5a7a50` | ![](https://via.placeholder.com/40/7aa068/7aa068.png) `#7aa068` | Trail |
-| **Neutrals** | ![](https://via.placeholder.com/40/6b5e50/6b5e50.png) `#6b5e50` | ![](https://via.placeholder.com/40/8a8a88/8a8a88.png) `#8a8a88` | ![](https://via.placeholder.com/40/f5f0e8/f5f0e8.png) `#f5f0e8` | Text / BG |
+| **Ocean Teal** | ![](../assets/colors/0f4a55.png) `#0f4a55` | ![](../assets/colors/1a6b7a.png) `#1a6b7a` | ![](../assets/colors/2a9db3.png) `#2a9db3` | Primary |
+| **Sunset Warm** | ![](../assets/colors/c45e20.png) `#c45e20` | ![](../assets/colors/e87d3a.png) `#e87d3a` | ![](../assets/colors/f4a66c.png) `#f4a66c` | Secondary |
+| **Golden Hour** | ![](../assets/colors/c49a20.png) `#c49a20` | ![](../assets/colors/e8c040.png) `#e8c040` | ![](../assets/colors/f5d870.png) `#f5d870` | Accent |
+| **Sandstone** | ![](../assets/colors/8a6540.png) `#8a6540` | ![](../assets/colors/c4956a.png) `#c4956a` | ![](../assets/colors/e0c4a0.png) `#e0c4a0` | Earth |
+| **SoCal Blue** | ![](../assets/colors/2a5a8a.png) `#2a5a8a` | ![](../assets/colors/4a88c8.png) `#4a88c8` | ![](../assets/colors/7ab0e8.png) `#7ab0e8` | Sky |
+| **Sage Green** | ![](../assets/colors/3a5a32.png) `#3a5a32` | ![](../assets/colors/5a7a50.png) `#5a7a50` | ![](../assets/colors/7aa068.png) `#7aa068` | Trail |
+| **Neutrals** | ![](../assets/colors/6b5e50.png) `#6b5e50` | ![](../assets/colors/8a8a88.png) `#8a8a88` | ![](../assets/colors/f5f0e8.png) `#f5f0e8` | Text / BG |
 
 ### Primary — Ocean Teal
 
@@ -41,9 +41,9 @@ From the water in your kayaking, whale watching, sailing, and snorkeling photos.
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#0f4a55](https://via.placeholder.com/60x30/0f4a55/0f4a55.png) | `#0f4a55` | Night Ocean (dark) | Nav/footer background |
-| ![#1a6b7a](https://via.placeholder.com/60x30/1a6b7a/1a6b7a.png) | `#1a6b7a` | Deep Ocean Teal (base) | Primary buttons, links |
-| ![#2a9db3](https://via.placeholder.com/60x30/2a9db3/2a9db3.png) | `#2a9db3` | Shallow Water (light) | Hover states, accents |
+| ![#0f4a55](../assets/colors/0f4a55.png) | `#0f4a55` | Night Ocean (dark) | Nav/footer background |
+| ![#1a6b7a](../assets/colors/1a6b7a.png) | `#1a6b7a` | Deep Ocean Teal (base) | Primary buttons, links |
+| ![#2a9db3](../assets/colors/2a9db3.png) | `#2a9db3` | Shallow Water (light) | Hover states, accents |
 
 This is the dominant color. It's used for the navigation bar, footer, buttons, and links. It says "ocean" and "adventure" without saying it.
 
@@ -53,9 +53,9 @@ From the Sunset Cliffs golden hour shots and desert sunset photography.
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#c45e20](https://via.placeholder.com/60x30/c45e20/c45e20.png) | `#c45e20` | Deep Sunset (dark) | Button hover |
-| ![#e87d3a](https://via.placeholder.com/60x30/e87d3a/e87d3a.png) | `#e87d3a` | Sunset Orange (base) | CTA buttons (Join, RSVP) |
-| ![#f4a66c](https://via.placeholder.com/60x30/f4a66c/f4a66c.png) | `#f4a66c` | Peach Glow (light) | Alerts, soft highlights |
+| ![#c45e20](../assets/colors/c45e20.png) | `#c45e20` | Deep Sunset (dark) | Button hover |
+| ![#e87d3a](../assets/colors/e87d3a.png) | `#e87d3a` | Sunset Orange (base) | CTA buttons (Join, RSVP) |
+| ![#f4a66c](../assets/colors/f4a66c.png) | `#f4a66c` | Peach Glow (light) | Alerts, soft highlights |
 
 Used for call-to-action buttons ("Join," "RSVP"), alerts, and highlights. It draws the eye and creates energy — the warm counterpart to the cool teal.
 
@@ -65,9 +65,9 @@ From sunset reflections on water, life vests, and sandstone highlights.
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#c49a20](https://via.placeholder.com/60x30/c49a20/c49a20.png) | `#c49a20` | Deep Gold (dark) | Active states |
-| ![#e8c040](https://via.placeholder.com/60x30/e8c040/e8c040.png) | `#e8c040` | Golden Amber (base) | Nav hover, underlines |
-| ![#f5d870](https://via.placeholder.com/60x30/f5d870/f5d870.png) | `#f5d870` | Light Gold (light) | Subtle highlights |
+| ![#c49a20](../assets/colors/c49a20.png) | `#c49a20` | Deep Gold (dark) | Active states |
+| ![#e8c040](../assets/colors/e8c040.png) | `#e8c040` | Golden Amber (base) | Nav hover, underlines |
+| ![#f5d870](../assets/colors/f5d870.png) | `#f5d870` | Light Gold (light) | Subtle highlights |
 
 Used for hover effects on navigation links, underlines, and subtle highlights. It complements the rainbow logo without competing with it.
 
@@ -77,9 +77,9 @@ From Bryce Canyon hoodoos, coastal cliffs, and trail dirt.
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#8a6540](https://via.placeholder.com/60x30/8a6540/8a6540.png) | `#8a6540` | Deep Earth (dark) | Dark borders |
-| ![#c4956a](https://via.placeholder.com/60x30/c4956a/c4956a.png) | `#c4956a` | Warm Sandstone (base) | Borders, dividers |
-| ![#e0c4a0](https://via.placeholder.com/60x30/e0c4a0/e0c4a0.png) | `#e0c4a0` | Buff Sand (light) | Secondary backgrounds |
+| ![#8a6540](../assets/colors/8a6540.png) | `#8a6540` | Deep Earth (dark) | Dark borders |
+| ![#c4956a](../assets/colors/c4956a.png) | `#c4956a` | Warm Sandstone (base) | Borders, dividers |
+| ![#e0c4a0](../assets/colors/e0c4a0.png) | `#e0c4a0` | Buff Sand (light) | Secondary backgrounds |
 
 Used for borders, dividers, and secondary backgrounds. Grounds the design in the desert and canyon landscapes your group explores.
 
@@ -89,9 +89,9 @@ From the clear blue skies that appear in nearly every GAF photo.
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#2a5a8a](https://via.placeholder.com/60x30/2a5a8a/2a5a8a.png) | `#2a5a8a` | Deep Sky (dark) | Dark info states |
-| ![#4a88c8](https://via.placeholder.com/60x30/4a88c8/4a88c8.png) | `#4a88c8` | SoCal Blue (base) | Info badges, calendar |
-| ![#7ab0e8](https://via.placeholder.com/60x30/7ab0e8/7ab0e8.png) | `#7ab0e8` | Bright Sky (light) | Light info highlights |
+| ![#2a5a8a](../assets/colors/2a5a8a.png) | `#2a5a8a` | Deep Sky (dark) | Dark info states |
+| ![#4a88c8](../assets/colors/4a88c8.png) | `#4a88c8` | SoCal Blue (base) | Info badges, calendar |
+| ![#7ab0e8](../assets/colors/7ab0e8.png) | `#7ab0e8` | Bright Sky (light) | Light info highlights |
 
 Used for informational badges, links in content areas, and calendar elements. Familiar and calming — the backdrop to every adventure.
 
@@ -101,9 +101,9 @@ From hiking foliage, Yosemite pines, and coastal vegetation.
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#3a5a32](https://via.placeholder.com/60x30/3a5a32/3a5a32.png) | `#3a5a32` | Forest (dark) | Dark success states |
-| ![#5a7a50](https://via.placeholder.com/60x30/5a7a50/5a7a50.png) | `#5a7a50` | Sage Green (base) | Success badges |
-| ![#7aa068](https://via.placeholder.com/60x30/7aa068/7aa068.png) | `#7aa068` | Meadow (light) | Light success highlights |
+| ![#3a5a32](../assets/colors/3a5a32.png) | `#3a5a32` | Forest (dark) | Dark success states |
+| ![#5a7a50](../assets/colors/5a7a50.png) | `#5a7a50` | Sage Green (base) | Success badges |
+| ![#7aa068](../assets/colors/7aa068.png) | `#7aa068` | Meadow (light) | Light success highlights |
 
 Used for success states (approved listings, confirmed RSVPs, completed events). Evokes the trails and natural settings of your adventures.
 
@@ -111,10 +111,10 @@ Used for success states (approved listings, confirmed RSVPs, completed events). 
 
 | Swatch | Hex | Name | Usage |
 |--------|-----|------|-------|
-| ![#6b5e50](https://via.placeholder.com/60x30/6b5e50/6b5e50.png) | `#6b5e50` | Driftwood | Body text, headings |
-| ![#8a8a88](https://via.placeholder.com/60x30/8a8a88/8a8a88.png) | `#8a8a88` | Granite | Muted text, captions |
-| ![#f5f0e8](https://via.placeholder.com/60x30/f5f0e8/f5f0e8.png) | `#f5f0e8` | Beach Sand | Page backgrounds |
-| ![#ffffff](https://via.placeholder.com/60x30/ffffff/cccccc.png) | `#ffffff` | White | Card backgrounds |
+| ![#6b5e50](../assets/colors/6b5e50.png) | `#6b5e50` | Driftwood | Body text, headings |
+| ![#8a8a88](../assets/colors/8a8a88.png) | `#8a8a88` | Granite | Muted text, captions |
+| ![#f5f0e8](../assets/colors/f5f0e8.png) | `#f5f0e8` | Beach Sand | Page backgrounds |
+| ![#ffffff](../assets/colors/ffffff.png) | `#ffffff` | White | Card backgrounds |
 
 Beach Sand (`#f5f0e8`) replaces the cold gray backgrounds used on most websites. It's warmer, friendlier, and feels like being outside. White is used for content cards that float over the background photography.
 
@@ -145,12 +145,12 @@ This renders as San Francisco on iPhones/Macs, Segoe UI on Windows, and Roboto o
 
 | Element | Size | Weight | Color | Notes |
 |---------|------|--------|-------|-------|
-| **Page Title (H1)** | 36px (2.25rem) | 800 Extra Bold | ![](https://via.placeholder.com/12/6b5e50/6b5e50.png) Driftwood | Tight letter spacing (-0.025em) |
-| **Section Title (H2)** | 30px (1.875rem) | 700 Bold | ![](https://via.placeholder.com/12/6b5e50/6b5e50.png) Driftwood | Tight letter spacing (-0.025em) |
-| **Subsection (H3)** | 24px (1.5rem) | 600 Semibold | ![](https://via.placeholder.com/12/1a6b7a/1a6b7a.png) Ocean Teal | Adds color contrast at this level |
-| **Card Title (H4)** | 20px (1.25rem) | 600 Semibold | ![](https://via.placeholder.com/12/6b5e50/6b5e50.png) Driftwood | |
-| **Body Text** | 16px (1rem) | 400 Regular | ![](https://via.placeholder.com/12/6b5e50/6b5e50.png) Driftwood | Line height 1.625 (relaxed) |
-| **Small / Captions** | 14px (0.875rem) | 400 Regular | ![](https://via.placeholder.com/12/8a8a88/8a8a88.png) Granite | |
+| **Page Title (H1)** | 36px (2.25rem) | 800 Extra Bold | ![](../assets/colors/6b5e50.png) Driftwood | Tight letter spacing (-0.025em) |
+| **Section Title (H2)** | 30px (1.875rem) | 700 Bold | ![](../assets/colors/6b5e50.png) Driftwood | Tight letter spacing (-0.025em) |
+| **Subsection (H3)** | 24px (1.5rem) | 600 Semibold | ![](../assets/colors/1a6b7a.png) Ocean Teal | Adds color contrast at this level |
+| **Card Title (H4)** | 20px (1.25rem) | 600 Semibold | ![](../assets/colors/6b5e50.png) Driftwood | |
+| **Body Text** | 16px (1rem) | 400 Regular | ![](../assets/colors/6b5e50.png) Driftwood | Line height 1.625 (relaxed) |
+| **Small / Captions** | 14px (0.875rem) | 400 Regular | ![](../assets/colors/8a8a88.png) Granite | |
 | **Badges / Labels** | 12px (0.75rem) | 600 Semibold | Varies | Uppercase, letter spacing 0.05em |
 
 ### Navigation Text
@@ -161,9 +161,9 @@ This renders as San Francisco on iPhones/Macs, Segoe UI on Windows, and Roboto o
 | Weight | 500 (medium) |
 | Transform | Uppercase |
 | Letter spacing | 0.5px |
-| Color | ![](https://via.placeholder.com/12/ffffff/cccccc.png) White |
-| Hover color | ![](https://via.placeholder.com/12/e8c040/e8c040.png) Golden Amber (`#e8c040`) |
-| Hover underline | ![](https://via.placeholder.com/12/e8c040/e8c040.png) Golden, grows on hover |
+| Color | ![](../assets/colors/ffffff.png) White |
+| Hover color | ![](../assets/colors/e8c040.png) Golden Amber (`#e8c040`) |
+| Hover underline | ![](../assets/colors/e8c040.png) Golden, grows on hover |
 
 ---
 
@@ -249,11 +249,11 @@ When a visitor scrolls past the footer, the page reveals the full background pho
 
 | Button | Color | Hover | Text | Example Use |
 |--------|-------|-------|------|-------------|
-| **Primary** | ![](https://via.placeholder.com/20/1a6b7a/1a6b7a.png) `#1a6b7a` Ocean Teal | ![](https://via.placeholder.com/20/0f4a55/0f4a55.png) `#0f4a55` | White | "Join the Community", "Save", "Send" |
-| **Secondary** | White with ![](https://via.placeholder.com/20/c4956a/c4956a.png) `#c4956a` border | ![](https://via.placeholder.com/20/f5f0e8/f5f0e8.png) `#f5f0e8` | ![](https://via.placeholder.com/20/6b5e50/6b5e50.png) `#6b5e50` | "Learn More", "Cancel", "Back" |
-| **Call to Action** | ![](https://via.placeholder.com/20/e87d3a/e87d3a.png) `#e87d3a` Sunset Orange | ![](https://via.placeholder.com/20/c45e20/c45e20.png) `#c45e20` | White | "RSVP", "Join This Adventure", "Donate" |
-| **Success** | ![](https://via.placeholder.com/20/16a34a/16a34a.png) `#16a34a` Green | ![](https://via.placeholder.com/20/15803d/15803d.png) `#15803d` | White | "Approve" |
-| **Danger** | ![](https://via.placeholder.com/20/dc2626/dc2626.png) `#dc2626` Red | ![](https://via.placeholder.com/20/b91c1c/b91c1c.png) `#b91c1c` | White | "Reject", "Remove", "Delete" |
+| **Primary** | ![](../assets/colors/1a6b7a.png) `#1a6b7a` Ocean Teal | ![](../assets/colors/0f4a55.png) `#0f4a55` | White | "Join the Community", "Save", "Send" |
+| **Secondary** | White with ![](../assets/colors/c4956a.png) `#c4956a` border | ![](../assets/colors/f5f0e8.png) `#f5f0e8` | ![](../assets/colors/6b5e50.png) `#6b5e50` | "Learn More", "Cancel", "Back" |
+| **Call to Action** | ![](../assets/colors/e87d3a.png) `#e87d3a` Sunset Orange | ![](../assets/colors/c45e20.png) `#c45e20` | White | "RSVP", "Join This Adventure", "Donate" |
+| **Success** | ![](../assets/colors/16a34a.png) `#16a34a` Green | ![](../assets/colors/15803d.png) `#15803d` | White | "Approve" |
+| **Danger** | ![](../assets/colors/dc2626.png) `#dc2626` Red | ![](../assets/colors/b91c1c.png) `#b91c1c` | White | "Reject", "Remove", "Delete" |
 
 All buttons use 6px corner radius, 14px font at weight 500, and 12px vertical / 24px horizontal padding. Call-to-action buttons are slightly larger at 16px font, weight 600.
 
@@ -265,11 +265,11 @@ These small colored labels appear throughout the site to indicate the state of t
 
 | Badge | Background | Text | Where It Appears |
 |-------|-----------|------|-----------------|
-| **Approved** | ![](https://via.placeholder.com/20/dcfce7/dcfce7.png) `#dcfce7` | ![](https://via.placeholder.com/20/166534/166534.png) `#166534` | Approved listings, confirmed RSVPs |
-| **Pending** | ![](https://via.placeholder.com/20/fef9c3/fef9c3.png) `#fef9c3` | ![](https://via.placeholder.com/20/854d0e/854d0e.png) `#854d0e` | Listings awaiting review |
-| **Rejected** | ![](https://via.placeholder.com/20/fee2e2/fee2e2.png) `#fee2e2` | ![](https://via.placeholder.com/20/991b1b/991b1b.png) `#991b1b` | Rejected listings, cancelled events |
-| **Featured** | ![](https://via.placeholder.com/20/dbeafe/dbeafe.png) `#dbeafe` | ![](https://via.placeholder.com/20/1e40af/1e40af.png) `#1e40af` | Promoted listings |
-| **Admin** | ![](https://via.placeholder.com/20/e0e7ff/e0e7ff.png) `#e0e7ff` | ![](https://via.placeholder.com/20/3730a3/3730a3.png) `#3730a3` | Admin dashboard badge |
+| **Approved** | ![](../assets/colors/dcfce7.png) `#dcfce7` | ![](../assets/colors/166534.png) `#166534` | Approved listings, confirmed RSVPs |
+| **Pending** | ![](../assets/colors/fef9c3.png) `#fef9c3` | ![](../assets/colors/854d0e.png) `#854d0e` | Listings awaiting review |
+| **Rejected** | ![](../assets/colors/fee2e2.png) `#fee2e2` | ![](../assets/colors/991b1b.png) `#991b1b` | Rejected listings, cancelled events |
+| **Featured** | ![](../assets/colors/dbeafe.png) `#dbeafe` | ![](../assets/colors/1e40af.png) `#1e40af` | Promoted listings |
+| **Admin** | ![](../assets/colors/e0e7ff.png) `#e0e7ff` | ![](../assets/colors/3730a3.png) `#3730a3` | Admin dashboard badge |
 
 ---
 
