@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David R. — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .profile-container { max-width: 48rem; margin: 0 auto; }
+        .profile-header { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .profile-name { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.25rem; }
+        .profile-since { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .profile-bio { font-size: 0.875rem; line-height: 1.7; color: var(--text); margin-bottom: 1.5rem; }
+        .profile-stats { display: flex; gap: 2rem; margin-bottom: 1.5rem; }
+        .profile-stat { text-align: center; }
+        .profile-stat .num { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        .profile-stat .lbl { font-size: 0.75rem; color: var(--text-muted); }
+        .adventure-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .adventure-item { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem; background: #fff; border-radius: 0.5rem; border: 1px solid var(--border); }
+        .adventure-item .date-col { width: 45px; text-align: center; flex-shrink: 0; }
+        .adventure-item .month { font-size: 0.625rem; text-transform: uppercase; font-weight: 600; color: var(--accent); }
+        .adventure-item .day { font-size: 1.25rem; font-weight: 800; color: var(--primary-dark); line-height: 1; }
+        .adventure-item h4 { font-size: 0.8125rem; margin-bottom: 0; }
+        .adventure-item p { font-size: 0.6875rem; color: var(--text-muted); }
+        .interests { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .interest-tag { padding: 0.25rem 0.75rem; border-radius: 999px; font-size: 0.75rem; font-weight: 500; background: var(--sand); color: var(--text); border: 1px solid var(--border); }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+    <main>
+        <div class="profile-container">
+            <div class="glass">
+                <div class="profile-header">
+                    <div class="avatar avatar-xl">DR</div>
+                    <div>
+                        <div class="profile-name">David R.</div>
+                        <div class="profile-since">Member since January 2018</div>
+                        <span class="badge badge-earth">Gold Star</span>
+                    </div>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="profile-stat">
+                        <div class="num">62</div>
+                        <div class="lbl">Adventures</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="num">4</div>
+                        <div class="lbl">Upcoming</div>
+                    </div>
+                    <div class="profile-stat">
+                        <div class="num">2018</div>
+                        <div class="lbl">Joined</div>
+                    </div>
+                </div>
+
+                <p class="profile-bio">Retired teacher turned full-time adventurer. Been with GAF since nearly the beginning and have seen the community grow from a handful of hikers to an incredible network. The whale watching trips to La Paz are my absolute favorite.</p>
+
+                <h4 style="font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Interests</h4>
+                <div class="interests">
+                    <span class="interest-tag">Whale Watching</span>
+                    <span class="interest-tag">Sailing</span>
+                    <span class="interest-tag">Hiking</span>
+                    <span class="interest-tag">Travel</span>
+                    <span class="interest-tag">Cooking</span>
+                </div>
+
+                <h4 style="font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Recent Adventures</h4>
+                <div class="adventure-list">
+                    <div class="adventure-item">
+                        <div class="date-col">
+                            <div class="month">Feb</div>
+                            <div class="day">1</div>
+                        </div>
+                        <div>
+                            <h4>La Paz Whale Watching</h4>
+                            <p>La Paz, Baja California Sur</p>
+                        </div>
+                    </div>
+                    <div class="adventure-item">
+                        <div class="date-col">
+                            <div class="month">Jan</div>
+                            <div class="day">25</div>
+                        </div>
+                        <div>
+                            <h4>Sunset Cliffs Hike</h4>
+                            <p>San Diego, CA</p>
+                        </div>
+                    </div>
+                    <div class="adventure-item">
+                        <div class="date-col">
+                            <div class="month">Dec</div>
+                            <div class="day">20</div>
+                        </div>
+                        <div>
+                            <h4>Holiday Party</h4>
+                            <p>Hillcrest, San Diego</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <a href="messages.html" class="btn btn-primary btn-sm">Send Message</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+    <div class="bg-reveal"></div>
+    <script src="slideshow.js"></script>
+</body>
+</html>

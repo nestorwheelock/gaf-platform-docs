@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversation — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+        .back-link {
+            display: inline-block;
+            font-size: 0.875rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        .back-link:hover { text-decoration: underline; color: var(--primary-dark); }
+        .conv-subject {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 0.25rem;
+        }
+        .conv-with {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .conv-with a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .conv-with a:hover { text-decoration: underline; }
+        .message-thread {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .message-bubble {
+            max-width: 75%;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            position: relative;
+        }
+        .message-bubble.mine {
+            align-self: flex-start;
+            background: rgba(26, 107, 122, 0.08);
+        }
+        .message-bubble.theirs {
+            align-self: flex-end;
+            background: #fff;
+            border: 1px solid var(--border);
+        }
+        .bubble-sender {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        .bubble-time {
+            font-size: 0.6875rem;
+            color: var(--text-muted);
+            margin-bottom: 0.375rem;
+        }
+        .bubble-text {
+            font-size: 0.875rem;
+            color: var(--text);
+            line-height: 1.6;
+        }
+        .reply-area {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+        .reply-area textarea {
+            flex: 1;
+            resize: vertical;
+            min-height: 2.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="messages.html" class="active">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="glass">
+            <a href="messages.html" class="back-link">&larr; Back to Messages</a>
+
+            <div class="conv-subject">Re: Inflatable Paddleboard</div>
+            <div class="conv-with">Conversation with <a href="profile-alex.html">Alex M.</a></div>
+
+            <div class="message-thread">
+                <div class="message-bubble mine">
+                    <div class="bubble-sender">You</div>
+                    <div class="bubble-time">Feb 20, 3:15 PM</div>
+                    <div class="bubble-text">Hey Alex! I saw you were interested in the paddleboard. It's in great condition — used it twice at Mission Bay. Includes the pump, paddle, and carry bag.</div>
+                </div>
+
+                <div class="message-bubble theirs">
+                    <div class="bubble-sender">Alex M.</div>
+                    <div class="bubble-time">Feb 20, 4:02 PM</div>
+                    <div class="bubble-text">That sounds perfect! I've been looking for one. Is the $220 price firm or is there any flexibility?</div>
+                </div>
+
+                <div class="message-bubble mine">
+                    <div class="bubble-sender">You</div>
+                    <div class="bubble-time">Feb 20, 4:30 PM</div>
+                    <div class="bubble-text">I could do $200 if you can pick it up from Ocean Beach. It's too big to fit in my car easily.</div>
+                </div>
+
+                <div class="message-bubble theirs">
+                    <div class="bubble-sender">Alex M.</div>
+                    <div class="bubble-time">Feb 20, 5:15 PM</div>
+                    <div class="bubble-text">Deal! I've got an SUV so that works. When are you available for pickup?</div>
+                </div>
+
+                <div class="message-bubble mine">
+                    <div class="bubble-sender">You</div>
+                    <div class="bubble-time">Feb 21, 9:00 AM</div>
+                    <div class="bubble-text">Saturday morning works great for me. How about 10am? I'm on Newport Ave near the pier.</div>
+                </div>
+
+                <div class="message-bubble theirs">
+                    <div class="bubble-sender">Alex M.</div>
+                    <div class="bubble-time">Feb 21, 10:12 AM</div>
+                    <div class="bubble-text">Sounds great, when can I come see it? I'm free this weekend if Saturday works. See you at 10!</div>
+                </div>
+            </div>
+
+            <div class="reply-area">
+                <textarea rows="2" placeholder="Type your reply..."></textarea>
+                <button class="btn btn-primary btn-sm">Send</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

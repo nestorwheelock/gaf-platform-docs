@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunset Cliffs Coastal Hike — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+        .hero-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0.75rem 0.75rem 0 0;
+            display: block;
+        }
+        .detail-glass {
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: 0.75rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            margin-bottom: 2rem;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .detail-glass:hover {
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+        }
+        .detail-body { padding: 2rem; }
+        .event-title { font-size: 1.75rem; font-weight: 800; color: var(--primary-dark); margin-bottom: 0.5rem; }
+        .type-hiking { background: var(--success-bg); color: var(--success-text); }
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem 2rem;
+            margin-bottom: 1.5rem;
+            padding: 1.25rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .meta-item { font-size: 0.875rem; color: var(--text); }
+        .meta-item .meta-label {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.125rem;
+        }
+        .meta-item a { color: var(--primary); text-decoration: none; }
+        .meta-item a:hover { text-decoration: underline; }
+        .description { font-size: 0.9375rem; line-height: 1.7; color: var(--text); margin-bottom: 1.5rem; }
+        .bring-list { margin-bottom: 1.5rem; }
+        .bring-list h3 { font-size: 1.125rem; font-weight: 700; color: var(--text); margin-bottom: 0.75rem; }
+        .bring-list ul {
+            list-style: none;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.375rem;
+        }
+        .bring-list li {
+            font-size: 0.875rem;
+            color: var(--text);
+            padding-left: 1.25rem;
+            position: relative;
+        }
+        .bring-list li::before {
+            content: "\2713";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+        .capacity-section {
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .capacity-section .capacity-bar { height: 10px; margin-bottom: 0.5rem; }
+        .capacity-section .capacity-fill { height: 100%; }
+        .capacity-large-text {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        .capacity-remaining {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        .waiver-notice {
+            background: var(--info-bg);
+            border: 1px solid #bfdbfe;
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+            font-size: 0.8125rem;
+            color: var(--info-text);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .waiver-notice a { color: var(--info-text); font-weight: 600; }
+        .attendees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 1rem;
+            text-align: center;
+        }
+        .attendee { text-decoration: none; color: var(--text); }
+        .attendee:hover .avatar { transform: scale(1.1); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .attendee .avatar {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 0.375rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .attendee-name { font-size: 0.75rem; color: var(--text); line-height: 1.3; }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-bottom: 1rem;
+        }
+        .back-link:hover { color: var(--primary); }
+        @media (max-width: 640px) {
+            .meta-grid { grid-template-columns: 1fr; }
+            .bring-list ul { grid-template-columns: 1fr; }
+            .attendees-grid { grid-template-columns: repeat(auto-fill, minmax(70px, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="events.html" class="active">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <a href="events.html" class="back-link">&larr; Back to Events</a>
+
+        <div class="detail-glass">
+            <img src="../assets/images/sunset-cliffs-group-2024.jpg" alt="Sunset Cliffs Coastal Hike" class="hero-image">
+
+            <div class="detail-body">
+                <h2 class="event-title">Sunset Cliffs Coastal Hike</h2>
+                <span class="badge type-hiking mb-2" style="display:inline-flex;">Hiking</span>
+
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <div class="meta-label">Date</div>
+                        Saturday, March 15, 2026
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Time</div>
+                        8:00 AM &ndash; 12:00 PM
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Location</div>
+                        Sunset Cliffs Natural Park, San Diego
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Type</div>
+                        Hiking
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Difficulty</div>
+                        Moderate
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">Organizer</div>
+                        <a href="profile-jeffrey.html">Jeffrey L.</a>
+                    </div>
+                </div>
+
+                <p class="description">
+                    Join us for a morning hike along the stunning Sunset Cliffs coastline. This moderate-difficulty hike covers approximately 4 miles round trip with breathtaking ocean views. We'll explore tide pools, watch for dolphins, and finish at a scenic overlook for group photos. Bring water, sunscreen, sturdy shoes, and a camera.
+                </p>
+
+                <div class="bring-list">
+                    <h3>What to Bring</h3>
+                    <ul>
+                        <li>Water (at least 1L)</li>
+                        <li>Sunscreen</li>
+                        <li>Sturdy hiking shoes</li>
+                        <li>Camera</li>
+                        <li>Snacks</li>
+                    </ul>
+                </div>
+
+                <div class="capacity-section">
+                    <div class="capacity-large-text">16 / 20 spots filled</div>
+                    <div class="capacity-remaining">4 spots remaining</div>
+                    <div class="capacity-bar"><div class="capacity-fill" style="width:80%"></div></div>
+                    <div style="margin-top:1rem;">
+                        <a href="#" class="btn btn-cta" style="padding:0.875rem 2.5rem; font-size:1rem;">RSVP &mdash; Join This Adventure</a>
+                    </div>
+                </div>
+
+                <div class="waiver-notice">
+                    This event requires a signed liability waiver. You'll be prompted to sign after RSVP.
+                    <a href="waiver-sign.html">View waiver details &rarr;</a>
+                </div>
+
+                <h3 class="section-title">Who's Going</h3>
+                <div class="attendees-grid">
+                    <a href="profile-jeffrey.html" class="attendee">
+                        <div class="avatar">JM</div>
+                        <div class="attendee-name">Jeffrey M.</div>
+                    </a>
+                    <a href="profile-alex.html" class="attendee">
+                        <div class="avatar">AM</div>
+                        <div class="attendee-name">Alex M.</div>
+                    </a>
+                    <a href="profile-chris.html" class="attendee">
+                        <div class="avatar">CT</div>
+                        <div class="attendee-name">Chris T.</div>
+                    </a>
+                    <a href="profile-david.html" class="attendee">
+                        <div class="avatar">DR</div>
+                        <div class="attendee-name">David R.</div>
+                    </a>
+                    <a href="profile-jason.html" class="attendee">
+                        <div class="avatar">JL</div>
+                        <div class="attendee-name">Jason L.</div>
+                    </a>
+                    <a href="profile-kevin.html" class="attendee">
+                        <div class="avatar">KP</div>
+                        <div class="attendee-name">Kevin P.</div>
+                    </a>
+                    <a href="profile-mark.html" class="attendee">
+                        <div class="avatar">MS</div>
+                        <div class="attendee-name">Mark S.</div>
+                    </a>
+                    <a href="profile-ryan.html" class="attendee">
+                        <div class="avatar">RT</div>
+                        <div class="attendee-name">Ryan T.</div>
+                    </a>
+                    <a href="profile-carlos.html" class="attendee">
+                        <div class="avatar">CM</div>
+                        <div class="attendee-name">Carlos M.</div>
+                    </a>
+                    <a href="profile-miguel.html" class="attendee">
+                        <div class="avatar">MS</div>
+                        <div class="attendee-name">Miguel S.</div>
+                    </a>
+                    <a href="profile-derek.html" class="attendee">
+                        <div class="avatar">DP</div>
+                        <div class="attendee-name">Derek P.</div>
+                    </a>
+                    <a href="profile-tyler.html" class="attendee">
+                        <div class="avatar">TM</div>
+                        <div class="attendee-name">Tyler M.</div>
+                    </a>
+                    <a href="profile-eric.html" class="attendee">
+                        <div class="avatar">EH</div>
+                        <div class="attendee-name">Eric H.</div>
+                    </a>
+                    <a href="profile-trevor.html" class="attendee">
+                        <div class="avatar">TA</div>
+                        <div class="attendee-name">Trevor A.</div>
+                    </a>
+                    <a href="profile-andre.html" class="attendee">
+                        <div class="avatar">AW</div>
+                        <div class="attendee-name">Andre W.</div>
+                    </a>
+                    <a href="profile-patrick.html" class="attendee">
+                        <div class="avatar">PS</div>
+                        <div class="attendee-name">Patrick S.</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

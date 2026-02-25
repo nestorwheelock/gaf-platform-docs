@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        /* ─── ADMIN SIDEBAR LAYOUT ─── */
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 5.5rem;
+        }
+        .sidebar-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+        }
+        .sidebar-nav a {
+            display: block;
+            padding: 0.625rem 1rem;
+            font-size: 0.875rem;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+        .sidebar-nav a:hover {
+            background: rgba(26, 107, 122, 0.08);
+            color: var(--primary);
+        }
+        .sidebar-nav a.active {
+            font-weight: 700;
+            color: var(--primary-dark);
+            background: rgba(26, 107, 122, 0.1);
+        }
+        .sidebar-icon {
+            display: inline-block;
+            width: 1.25rem;
+            text-align: center;
+            margin-right: 0.5rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ─── STAT CARDS ─── */
+        .stat-card {
+            text-align: center;
+            padding: 1.25rem 1rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+        }
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 0.375rem;
+        }
+        .stat-label {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .stat-warning .stat-number { color: var(--warning-text); }
+        .stat-warning { border-left: 3px solid #f59e0b; }
+        .stat-primary .stat-number { color: var(--primary); }
+        .stat-primary { border-left: 3px solid var(--primary); }
+        .stat-success .stat-number { color: var(--success); }
+        .stat-success { border-left: 3px solid var(--success); }
+        .stat-info .stat-number { color: var(--info-text); }
+        .stat-info { border-left: 3px solid #3b82f6; }
+
+        /* ─── SECTION TITLES ─── */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        /* ─── MODERATION QUEUE ─── */
+        .mod-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.875rem 0;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+        }
+        .mod-row:last-child { border-bottom: none; }
+        .mod-left {
+            flex: 1;
+            min-width: 0;
+        }
+        .mod-title {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        .mod-meta {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+        .mod-meta a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .mod-meta a:hover { text-decoration: underline; }
+        .mod-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        /* ─── MEMBER TABLE ─── */
+        .member-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.875rem;
+        }
+        .member-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.625rem 0.75rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .member-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .member-table tr:last-child td { border-bottom: none; }
+        .member-table a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .member-table a:hover { text-decoration: underline; }
+        .tier-badge {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tier-gold { background: #fef3c7; color: #92400e; }
+        .tier-frequent { background: #dbeafe; color: #1e40af; }
+        .tier-supporter { background: #e0f2f1; color: var(--primary-dark); }
+        .tier-basic { background: #f3f4f6; color: #6b7280; }
+
+        /* ─── AUDIT LOG ─── */
+        .log-entry {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.875rem;
+        }
+        .log-entry:last-child { border-bottom: none; }
+        .log-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.375rem;
+        }
+        .log-dot-green { background: var(--success); }
+        .log-dot-blue { background: #3b82f6; }
+        .log-dot-gray { background: #9ca3af; }
+        .log-dot-orange { background: var(--accent); }
+        .log-dot-yellow { background: #eab308; }
+        .log-text { flex: 1; color: var(--text); line-height: 1.5; }
+        .log-text strong { font-weight: 600; }
+        .log-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+            .sidebar {
+                position: static;
+            }
+            .sidebar-nav {
+                flex-direction: row;
+                overflow-x: auto;
+                gap: 0.25rem;
+            }
+            .sidebar-nav a {
+                white-space: nowrap;
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+            .mod-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .mod-actions {
+                margin-top: 0.5rem;
+            }
+            .member-table {
+                font-size: 0.75rem;
+            }
+            .member-table th,
+            .member-table td {
+                padding: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="admin-layout">
+
+            <!-- ─── SIDEBAR ─── -->
+            <aside class="glass sidebar" style="padding: 1rem;">
+                <ul class="sidebar-nav">
+                    <li><a href="#" class="active"><span class="sidebar-icon">&#9632;</span>Dashboard</a></li>
+                    <li><a href="#"><span class="sidebar-icon">&#9775;</span>Members</a></li>
+                    <li><a href="#"><span class="sidebar-icon">&#9733;</span>Events</a></li>
+                    <li><a href="#"><span class="sidebar-icon">&#9776;</span>Listings</a></li>
+                    <li><a href="#"><span class="sidebar-icon">&#9881;</span>Audit Log</a></li>
+                    <li><a href="#"><span class="sidebar-icon">&#9881;</span>Settings</a></li>
+                </ul>
+            </aside>
+
+            <!-- ─── MAIN CONTENT ─── -->
+            <div class="admin-content">
+
+                <!-- ─── STATS ROW ─── -->
+                <div class="grid grid-4 mb-3">
+                    <div class="stat-card stat-warning">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Pending Review</div>
+                    </div>
+                    <div class="stat-card stat-primary">
+                        <div class="stat-number">47</div>
+                        <div class="stat-label">Active Listings</div>
+                    </div>
+                    <div class="stat-card stat-success">
+                        <div class="stat-number">312</div>
+                        <div class="stat-label">Total Members</div>
+                    </div>
+                    <div class="stat-card stat-info">
+                        <div class="stat-number">52</div>
+                        <div class="stat-label">Events This Year</div>
+                    </div>
+                </div>
+
+                <!-- ─── MODERATION QUEUE ─── -->
+                <div class="glass">
+                    <div class="section-title">
+                        Moderation Queue
+                        <span class="badge badge-warning">5 pending</span>
+                    </div>
+
+                    <div class="mod-row">
+                        <div class="mod-left">
+                            <div class="mod-title">Spacious 1BR in Hillcrest</div>
+                            <div class="mod-meta">
+                                <span class="badge badge-info">Housing</span>
+                                &nbsp;by <a href="profile-alex.html">Alex M.</a> &middot; 2h ago
+                            </div>
+                        </div>
+                        <div class="mod-actions">
+                            <button class="btn btn-success btn-xs">Approve</button>
+                            <button class="btn btn-danger btn-xs">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="mod-row">
+                        <div class="mod-left">
+                            <div class="mod-title">Experienced Dog Walker</div>
+                            <div class="mod-meta">
+                                <span class="badge badge-primary">Services</span>
+                                &nbsp;by <a href="profile-chris.html">Chris T.</a> &middot; 5h ago
+                            </div>
+                        </div>
+                        <div class="mod-actions">
+                            <button class="btn btn-success btn-xs">Approve</button>
+                            <button class="btn btn-danger btn-xs">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="mod-row">
+                        <div class="mod-left">
+                            <div class="mod-title">Senior Frontend Developer</div>
+                            <div class="mod-meta">
+                                <span class="badge badge-earth">Jobs</span>
+                                &nbsp;by <a href="profile-ryan.html">Ryan T.</a> &middot; 8h ago
+                            </div>
+                        </div>
+                        <div class="mod-actions">
+                            <button class="btn btn-success btn-xs">Approve</button>
+                            <button class="btn btn-danger btn-xs">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="mod-row">
+                        <div class="mod-left">
+                            <div class="mod-title">Room Available in North Park</div>
+                            <div class="mod-meta">
+                                <span class="badge badge-warning">Roommates</span>
+                                &nbsp;by <a href="profile-mark.html">Mark S.</a> &middot; 1d ago
+                            </div>
+                        </div>
+                        <div class="mod-actions">
+                            <button class="btn btn-success btn-xs">Approve</button>
+                            <button class="btn btn-danger btn-xs">Reject</button>
+                        </div>
+                    </div>
+
+                    <div class="mod-row">
+                        <div class="mod-left">
+                            <div class="mod-title">WeHo Studio Sublease</div>
+                            <div class="mod-meta">
+                                <span class="badge badge-info">Housing</span>
+                                &nbsp;by <a href="profile-david.html">David R.</a> &middot; 1d ago
+                            </div>
+                        </div>
+                        <div class="mod-actions">
+                            <button class="btn btn-success btn-xs">Approve</button>
+                            <button class="btn btn-danger btn-xs">Reject</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── MEMBER MANAGEMENT ─── -->
+                <div class="glass">
+                    <div class="section-title">Recent Members</div>
+                    <div style="overflow-x: auto;">
+                        <table class="member-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Tier</th>
+                                    <th>Joined</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="member.html">Jeffrey M.</a></td>
+                                    <td>jeffrey@example.com</td>
+                                    <td><span class="tier-badge tier-gold">Gold Star</span></td>
+                                    <td>Mar 2015</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-alex.html">Alex M.</a></td>
+                                    <td>alex@example.com</td>
+                                    <td><span class="tier-badge tier-frequent">Frequent Flyer</span></td>
+                                    <td>Jun 2019</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-chris.html">Chris T.</a></td>
+                                    <td>chris@example.com</td>
+                                    <td><span class="tier-badge tier-supporter">Supporter</span></td>
+                                    <td>Mar 2021</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-mark.html">Mark S.</a></td>
+                                    <td>mark@example.com</td>
+                                    <td><span class="tier-badge tier-gold">Gold Star</span></td>
+                                    <td>Jan 2020</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="profile-ryan.html">Ryan T.</a></td>
+                                    <td>ryan@example.com</td>
+                                    <td><span class="tier-badge tier-basic">Basic</span></td>
+                                    <td>Feb 2026</td>
+                                    <td><span class="badge badge-info">New</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ─── AUDIT LOG ─── -->
+                <div class="glass">
+                    <div class="section-title">Recent Activity</div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-green"></span>
+                        <div class="log-text"><strong>Jeffrey M.</strong> approved listing &ldquo;Dog Walking&rdquo;</div>
+                        <span class="log-time">1 hour ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-blue"></span>
+                        <div class="log-text"><strong>Mark S.</strong> registered via Facebook OAuth</div>
+                        <span class="log-time">3 hours ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-gray"></span>
+                        <div class="log-text"><strong>System</strong> expired 3 listings</div>
+                        <span class="log-time">6 hours ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-orange"></span>
+                        <div class="log-text"><strong>Jeffrey M.</strong> created event &ldquo;Sunset Cliffs Coastal Hike&rdquo;</div>
+                        <span class="log-time">1 day ago</span>
+                    </div>
+
+                    <div class="log-entry">
+                        <span class="log-dot log-dot-yellow"></span>
+                        <div class="log-text"><strong>Alex M.</strong> signed liability waiver</div>
+                        <span class="log-time">1 day ago</span>
+                    </div>
+                </div>
+
+            </div><!-- /admin-content -->
+        </div><!-- /admin-layout -->
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends Admin &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

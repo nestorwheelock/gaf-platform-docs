@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Adventures — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+        .category-tabs { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .tab {
+            padding: 0.5rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .tab:hover { border-color: var(--primary); color: var(--primary); }
+        .tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .event-list { display: flex; flex-direction: column; gap: 1rem; }
+        .event-row {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            align-items: center;
+        }
+        .event-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: var(--border);
+        }
+        .event-date-block {
+            width: 54px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .event-date-block .month {
+            font-size: 0.6875rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+        .event-date-block .day {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1;
+        }
+        .event-info { flex: 1; min-width: 0; }
+        .event-info h4 { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+        .event-info h4 a { color: inherit; text-decoration: none; }
+        .event-info h4 a:hover { color: var(--primary); text-decoration: underline; }
+        .event-meta-line { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .event-badges { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .event-organizer { font-size: 0.75rem; color: var(--text-muted); }
+        .event-right { width: 160px; flex-shrink: 0; text-align: right; }
+        .type-hiking { background: var(--success-bg); color: var(--success-text); }
+        .type-kayaking { background: var(--info-bg); color: var(--info-text); }
+        .type-sailing { background: #f0f9ff; color: #0c4a6e; }
+        .type-social { background: var(--warning-bg); color: var(--warning-text); }
+        .type-multiday { background: #f3e8ff; color: #7c3aed; }
+        .results-count { font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 1rem; }
+        @media (max-width: 640px) {
+            .event-row { flex-wrap: wrap; }
+            .event-thumb { width: 60px; height: 60px; }
+            .event-right { width: 100%; text-align: left; margin-top: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="events.html" class="active">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="messages.html">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="glass">
+            <h2 class="section-title">Upcoming Adventures</h2>
+
+            <div class="category-tabs">
+                <a href="#" class="tab active">All</a>
+                <a href="#" class="tab">Hiking</a>
+                <a href="#" class="tab">Kayaking</a>
+                <a href="#" class="tab">Sailing</a>
+                <a href="#" class="tab">Social</a>
+            </div>
+
+            <div class="results-count">Showing 7 upcoming events</div>
+
+            <div class="event-list">
+
+                <!-- Event 1: Sunset Cliffs Coastal Hike -->
+                <div class="card">
+                    <div class="event-row">
+                        <img src="../assets/images/sunset-cliffs-group-2024.jpg" alt="Sunset Cliffs Coastal Hike" class="event-thumb">
+                        <div class="event-date-block">
+                            <div class="month">Mar</div>
+                            <div class="day">15</div>
+                        </div>
+                        <div class="event-info">
+                            <h4><a href="event-detail.html">Sunset Cliffs Coastal Hike</a></h4>
+                            <div class="event-meta-line">Sat, Mar 15 &middot; 8:00 AM &middot; Sunset Cliffs, San Diego</div>
+                            <div class="event-badges">
+                                <span class="badge type-hiking">Hiking</span>
+                                <span class="event-organizer">Organizer: Jeffrey L.</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill" style="width:80%"></div></div>
+                            <div class="capacity-text mb-1"><span>16 / 20 spots</span><span>4 left</span></div>
+                            <a href="event-detail.html" class="btn btn-primary btn-sm btn-block">RSVP</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 2: Channel Islands Sea Cave Kayak -->
+                <div class="card">
+                    <div class="event-row">
+                        <img src="../assets/images/rock-arch-ocean.jpg" alt="Channel Islands Sea Cave Kayak" class="event-thumb">
+                        <div class="event-date-block">
+                            <div class="month">Mar</div>
+                            <div class="day">22</div>
+                        </div>
+                        <div class="event-info">
+                            <h4>Channel Islands Sea Cave Kayak</h4>
+                            <div class="event-meta-line">Sat, Mar 22 &middot; 7:00 AM &middot; Ventura Harbor</div>
+                            <div class="event-badges">
+                                <span class="badge type-kayaking">Kayaking</span>
+                                <span class="event-organizer">Organizer: Mike T.</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill" style="width:67%"></div></div>
+                            <div class="capacity-text mb-1"><span>8 / 12 spots</span><span>4 left</span></div>
+                            <button class="btn btn-primary btn-sm btn-block">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 3: San Diego Bay Sunset Sail -->
+                <div class="card">
+                    <div class="event-row">
+                        <div class="event-thumb" style="background: linear-gradient(135deg, #dbeafe, #93c5fd); display:flex; align-items:center; justify-content:center; font-size:2rem;">&#9973;</div>
+                        <div class="event-date-block">
+                            <div class="month">Apr</div>
+                            <div class="day">5</div>
+                        </div>
+                        <div class="event-info">
+                            <h4>San Diego Bay Sunset Sail</h4>
+                            <div class="event-meta-line">Sat, Apr 5 &middot; 4:00 PM &middot; Harbor Island</div>
+                            <div class="event-badges">
+                                <span class="badge type-sailing">Sailing</span>
+                                <span class="event-organizer">Organizer: David R.</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill warning" style="width:83%"></div></div>
+                            <div class="capacity-text mb-1"><span>5 / 6 spots</span><span style="color:var(--accent); font-weight:600;">1 left!</span></div>
+                            <button class="btn btn-primary btn-sm btn-block">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 4: Borrego Springs Desert Hike -->
+                <div class="card">
+                    <div class="event-row">
+                        <img src="../assets/images/borrego-badlands.jpg" alt="Borrego Springs Desert Hike" class="event-thumb">
+                        <div class="event-date-block">
+                            <div class="month">Apr</div>
+                            <div class="day">12</div>
+                        </div>
+                        <div class="event-info">
+                            <h4>Borrego Springs Desert Hike</h4>
+                            <div class="event-meta-line">Sat, Apr 12 &middot; 7:00 AM &middot; Anza-Borrego</div>
+                            <div class="event-badges">
+                                <span class="badge type-hiking">Hiking</span>
+                                <span class="event-organizer">Organizer: Jeffrey L.</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill" style="width:67%"></div></div>
+                            <div class="capacity-text mb-1"><span>10 / 15 spots</span><span>5 left</span></div>
+                            <button class="btn btn-primary btn-sm btn-block">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 5: Cooking Night Social (FULL) -->
+                <div class="card">
+                    <div class="event-row">
+                        <img src="../assets/images/cooking-night.jpg" alt="Cooking Night Social" class="event-thumb">
+                        <div class="event-date-block">
+                            <div class="month">Apr</div>
+                            <div class="day">18</div>
+                        </div>
+                        <div class="event-info">
+                            <h4>Cooking Night Social</h4>
+                            <div class="event-meta-line">Fri, Apr 18 &middot; 6:30 PM &middot; North Park, San Diego</div>
+                            <div class="event-badges">
+                                <span class="badge type-social">Social</span>
+                                <span class="badge badge-danger">Full</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill warning" style="width:100%"></div></div>
+                            <div class="capacity-text mb-1"><span>12 / 12 spots</span><span style="color:var(--danger); font-weight:600;">Full</span></div>
+                            <button class="btn btn-secondary-outline btn-sm btn-block">Waitlist</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 6: Three Sisters Falls Hike -->
+                <div class="card">
+                    <div class="event-row">
+                        <div class="event-thumb" style="background: linear-gradient(135deg, #dcfce7, #86efac); display:flex; align-items:center; justify-content:center; font-size:2rem;">&#127956;</div>
+                        <div class="event-date-block">
+                            <div class="month">Apr</div>
+                            <div class="day">26</div>
+                        </div>
+                        <div class="event-info">
+                            <h4>Three Sisters Falls Hike</h4>
+                            <div class="event-meta-line">Sat, Apr 26 &middot; 7:30 AM &middot; Julian, CA</div>
+                            <div class="event-badges">
+                                <span class="badge type-hiking">Hiking</span>
+                                <span class="event-organizer">Organizer: Alex M.</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill" style="width:30%"></div></div>
+                            <div class="capacity-text mb-1"><span>6 / 20 spots</span><span>14 left</span></div>
+                            <button class="btn btn-primary btn-sm btn-block">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Event 7: Utah National Parks Tour -->
+                <div class="card">
+                    <div class="event-row">
+                        <img src="../assets/images/antelope-canyon.jpg" alt="Utah National Parks Tour" class="event-thumb">
+                        <div class="event-date-block">
+                            <div class="month">Nov</div>
+                            <div class="day">22</div>
+                        </div>
+                        <div class="event-info">
+                            <h4>Utah National Parks Tour</h4>
+                            <div class="event-meta-line">Nov 22&ndash;30 &middot; All Day &middot; Southern Utah</div>
+                            <div class="event-badges">
+                                <span class="badge type-multiday">Multi-Day</span>
+                                <span class="event-organizer">Organizer: Jeffrey L.</span>
+                            </div>
+                        </div>
+                        <div class="event-right">
+                            <div class="capacity-bar"><div class="capacity-fill" style="width:57%"></div></div>
+                            <div class="capacity-text mb-1"><span>8 / 14 spots</span><span>6 left</span></div>
+                            <button class="btn btn-primary btn-sm btn-block">RSVP</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

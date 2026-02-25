@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messages — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .section-title { font-size: 1.5rem; font-weight: 700; color: var(--primary); margin-bottom: 1.25rem; }
+        .inbox-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+        .conversation-list { list-style: none; }
+        .conversation-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.15s;
+            cursor: pointer;
+            position: relative;
+        }
+        .conversation-row:last-child { border-bottom: none; }
+        .conversation-row:hover { background: rgba(26, 107, 122, 0.03); }
+        .conversation-row.unread .conv-name { font-weight: 700; color: var(--primary-dark); }
+        .conversation-row.unread .conv-subject { color: var(--text); font-weight: 600; }
+        .conversation-row.unread .conv-preview { color: var(--text); }
+        .unread-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+        }
+        .unread-dot.hidden { visibility: hidden; }
+        .conv-avatar a { text-decoration: none; }
+        .conv-center { flex: 1; min-width: 0; }
+        .conv-name {
+            font-size: 0.9375rem;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 0.125rem;
+        }
+        .conv-name a {
+            text-decoration: none;
+            color: inherit;
+        }
+        .conv-name a:hover { text-decoration: underline; }
+        .conv-subject {
+            font-size: 0.8125rem;
+            color: var(--text);
+            margin-bottom: 0.25rem;
+        }
+        .conv-preview {
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .conv-right {
+            text-align: right;
+            flex-shrink: 0;
+        }
+        .conv-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.webp" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="events.html">Events</a>
+                <a href="listings.html">Listings</a>
+                <a href="messages.html" class="active">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="glass">
+            <div class="inbox-header">
+                <h2 class="section-title" style="margin-bottom:0;">Messages</h2>
+                <button class="btn btn-primary btn-sm">Compose</button>
+            </div>
+
+            <div class="conversation-list">
+                <a href="conversation.html" class="conversation-row unread">
+                    <div class="unread-dot"></div>
+                    <div class="conv-avatar">
+                        <div class="avatar">AM</div>
+                    </div>
+                    <div class="conv-center">
+                        <div class="conv-name">Alex M.</div>
+                        <div class="conv-subject">Re: Inflatable Paddleboard</div>
+                        <div class="conv-preview">Sounds great! When can I come see it? I'm free this weekend...</div>
+                    </div>
+                    <div class="conv-right">
+                        <div class="conv-time">2 hours ago</div>
+                    </div>
+                </a>
+
+                <a href="profile-chris.html" class="conversation-row">
+                    <div class="unread-dot hidden"></div>
+                    <div class="conv-avatar">
+                        <div class="avatar">CT</div>
+                    </div>
+                    <div class="conv-center">
+                        <div class="conv-name">Chris T.</div>
+                        <div class="conv-subject">Re: Dog Walking Services</div>
+                        <div class="conv-preview">Thanks for the info! I'll definitely keep you in mind when...</div>
+                    </div>
+                    <div class="conv-right">
+                        <div class="conv-time">5 hours ago</div>
+                    </div>
+                </a>
+
+                <a href="#" class="conversation-row">
+                    <div class="unread-dot hidden"></div>
+                    <div class="conv-avatar">
+                        <div class="avatar">MS</div>
+                    </div>
+                    <div class="conv-center">
+                        <div class="conv-name">Mark S.</div>
+                        <div class="conv-subject">Channel Islands Kayak Question</div>
+                        <div class="conv-preview">Do I need to bring my own life vest or is that included?</div>
+                    </div>
+                    <div class="conv-right">
+                        <div class="conv-time">1 day ago</div>
+                    </div>
+                </a>
+
+                <a href="#" class="conversation-row unread">
+                    <div class="unread-dot"></div>
+                    <div class="conv-avatar">
+                        <div class="avatar">RT</div>
+                    </div>
+                    <div class="conv-center">
+                        <div class="conv-name">Ryan T.</div>
+                        <div class="conv-subject">Re: Room Available in North Park</div>
+                        <div class="conv-preview">Hey, is the room still available? I just moved to SD from...</div>
+                    </div>
+                    <div class="conv-right">
+                        <div class="conv-time">2 days ago</div>
+                    </div>
+                </a>
+
+                <a href="#" class="conversation-row">
+                    <div class="unread-dot hidden"></div>
+                    <div class="conv-avatar">
+                        <div class="avatar">DR</div>
+                    </div>
+                    <div class="conv-center">
+                        <div class="conv-name">David R.</div>
+                        <div class="conv-subject">Sunset Sail Carpool</div>
+                        <div class="conv-preview">Want to split gas to Harbor Island? I'm coming from Hillcrest.</div>
+                    </div>
+                    <div class="conv-right">
+                        <div class="conv-time">3 days ago</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>

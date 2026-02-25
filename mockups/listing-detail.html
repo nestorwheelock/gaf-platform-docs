@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inflatable Paddleboard — Gay Adventure Friends</title>
+    <link rel="stylesheet" href="gaf-theme.css">
+    <style>
+        .back-link {
+            display: inline-block;
+            font-size: 0.8125rem;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 1.25rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: var(--primary-dark); text-decoration: underline; }
+        .photo-hero {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #e0d8cc, #c4b5a0);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin-bottom: 0.75rem;
+        }
+        .gallery-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .gallery-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+        }
+        .gallery-dot.active { background: var(--primary); }
+        .listing-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .listing-title { font-size: 1.5rem; font-weight: 800; color: var(--primary-dark); }
+        .featured-ribbon {
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.6875rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+            margin-top: 0.35rem;
+        }
+        .detail-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+        .description-text {
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            color: var(--text);
+        }
+        .meta-sidebar {
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 1.25rem;
+        }
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8125rem;
+        }
+        .meta-row:last-child { border-bottom: none; }
+        .meta-label { color: var(--text-muted); font-weight: 500; }
+        .meta-value { color: var(--text); font-weight: 600; }
+        .meta-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .tag {
+            font-size: 0.75rem;
+            color: var(--primary);
+            background: #e0f2f1;
+            padding: 0.25rem 0.625rem;
+            border-radius: 999px;
+            font-weight: 500;
+        }
+        .posted-by {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .posted-by-info { flex: 1; }
+        .posted-by-name {
+            font-size: 0.9375rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .posted-by-name:hover { text-decoration: underline; color: var(--primary-dark); }
+        .posted-by-detail {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        @media (max-width: 768px) {
+            .detail-layout { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-slideshow"></div>
+
+    <nav>
+        <div class="nav-inner">
+            <a href="home.html" class="nav-logo">
+                <img src="../assets/gaf-logo.png" alt="GAF">
+                <span>Gay Adventure Friends</span>
+            </a>
+            <div class="nav-links">
+                <a href="home.html">Home</a>
+                <a href="#">Events</a>
+                <a href="listings.html" class="active">Listings</a>
+                <a href="#">Messages</a>
+                <a href="member.html">Profile</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="glass">
+            <a href="listings.html" class="back-link">&larr; Back to Listings</a>
+
+            <div class="photo-hero">&#x1F3C4;</div>
+            <div class="gallery-dots">
+                <div class="gallery-dot active"></div>
+                <div class="gallery-dot"></div>
+                <div class="gallery-dot"></div>
+            </div>
+
+            <div class="listing-header">
+                <span class="listing-title">Inflatable Paddleboard — Like New</span>
+                <span class="featured-ribbon">Featured</span>
+            </div>
+
+            <div class="detail-layout">
+                <div>
+                    <p class="description-text">
+                        Barely used inflatable paddleboard — taken out twice at Mission Bay before I realized I prefer kayaking. Board is 10'6" all-around SUP, great for beginners and intermediate paddlers. Includes high-pressure hand pump, adjustable aluminum paddle, coiled ankle leash, removable center fin, and backpack carry bag. Originally purchased for $400 from REI. Board inflates in about 10 minutes and is incredibly stable on flat water. Pickup only in Ocean Beach — it fits in most SUVs when rolled up.
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">#forsale</span>
+                        <span class="tag">#paddleboard</span>
+                        <span class="tag">#oceanbeach</span>
+                        <span class="tag">#watersports</span>
+                    </div>
+
+                    <div class="posted-by">
+                        <div class="avatar">JM</div>
+                        <div class="posted-by-info">
+                            <a href="member.html" class="posted-by-name">Jeffrey M.</a>
+                            <div class="posted-by-detail">
+                                Member since March 2015<br>
+                                87 adventures attended
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-cta btn-block">Message About This Listing</button>
+                </div>
+
+                <div class="meta-sidebar">
+                    <div class="meta-row">
+                        <span class="meta-label">Category</span>
+                        <span class="badge badge-danger">For Sale</span>
+                    </div>
+                    <div class="meta-price">$220</div>
+                    <div class="meta-row">
+                        <span class="meta-label">Location</span>
+                        <span class="meta-value">Ocean Beach, San Diego</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Posted</span>
+                        <span class="meta-value">February 20, 2026</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Expires</span>
+                        <span class="meta-value">March 22, 2026</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Condition</span>
+                        <span class="meta-value">Like New</span>
+                    </div>
+                    <div class="meta-row">
+                        <span class="meta-label">Status</span>
+                        <span class="badge badge-success">Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <span class="footer-copy">Gay Adventure Friends &copy; 2025</span>
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="events.html">Events</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="bg-reveal"></div>
+
+    <script src="slideshow.js"></script>
+</body>
+</html>
