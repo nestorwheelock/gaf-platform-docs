@@ -79,29 +79,61 @@
 - Configurable retry with structured error tracking
 - Job status monitoring (pending → processing → completed/failed)
 
-## Membership & Payments ![Planned](https://img.shields.io/badge/status-planned-lightgrey)
+## Membership & Payments ![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
 
 - Four membership tiers: Basic (free), Supporter ($29/yr), Frequent Flyer ($59/yr), Gold Star ($180/yr)
+- Tier comparison page with feature breakdown and pricing cards
 - Stripe subscription management (create, upgrade, cancel, renew)
 - Variable one-time donations
 - Webhook-driven payment status sync
 - Tier-based feature gating for events
 - Join flow with tier comparison and checkout
+- Admin subscriber dashboard with MRR tracking, churn rate, and revenue-by-tier breakdown
 
-## Content Management ![Planned](https://img.shields.io/badge/status-planned-lightgrey)
+## Content Management ![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
 
-- CMS pages: Home, About, Join, Contact
+- CMS pages: Home, Contact, Join (mockups complete)
 - Block-based content editing (hero, rich text, image gallery, call-to-action, embed)
 - Photo management with automatic WebP variant generation
 - Admin page editor
 - WordPress content import (one-time migration)
 
-## Liability Waivers ![Planned](https://img.shields.io/badge/status-planned-lightgrey)
+## Liability Waivers ![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
 
 - All adventures require a signed waiver before attendance
 - Automatic waiver creation at RSVP time
+- Full liability waiver, image release, and photo & video release integrated into RSVP flow
+- Digital signature canvas capture
+- Five legal checkboxes with accept-all convenience toggle
 - Public token-based signing page (no authentication required)
 - Signature capture with device fingerprinting
 - Annual renewal tracking with configurable validity period
 - Check-in blocked for unsigned or expired waivers
 - Admin waiver management interface
+
+## RSVP Flow ![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
+
+- Combined RSVP and waiver page (single-step completion)
+- Emergency contact collection (name, phone, relationship)
+- Three-step progress indicator: Event details, RSVP & Waiver, Confirmed
+- Submit button greyed out and disabled until all required fields and checkboxes are completed
+- Device fingerprint capture on signature submission
+- Capacity-enforced RSVP with automatic waitlist
+
+## Admin Dashboard ![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
+
+- Seven-page admin panel: Dashboard, Members, Events, Community, Subscribers, Audit Log, Settings
+- Subscription revenue tracking with MRR ($14,847 sample), churn rate (2.1%), and net growth metrics
+- Revenue breakdown by membership tier
+- Content moderation queue with approve and reject workflows
+- Member management with search, filter, and pagination
+- Event administration with create, edit, and cancel controls
+- Audit log viewer with filtering and export
+
+## Photo & Video Release ![In Progress](https://img.shields.io/badge/status-in%20progress-yellow)
+
+- Detailed release clause covering four usage categories: social media, website and marketing, event recaps and highlights, print materials
+- Integrated into RSVP waiver flow as a dedicated legal section
+- Opt-out process available via email request to the organization
+- 30-day removal commitment for opt-out requests
+- Separate checkbox acknowledgment for photo and video release terms

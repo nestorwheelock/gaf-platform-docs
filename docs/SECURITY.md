@@ -32,6 +32,18 @@ This document describes the security architecture of the GAF platform at a high 
 - **Sensitivity classification** — Audit entries are tagged as normal, sensitive, or secret to support access-tiered log review.
 - **Full moderation history** — Every listing approval, rejection, suspension, role change, and member action is permanently recorded with actor identity and timestamp.
 
+## Digital Waivers & Legal Compliance
+
+- **Inline legal presentation** — Liability waiver, image release, and photo/video release are presented inline during the RSVP flow. Users cannot proceed without reviewing each document in context.
+- **Granular acknowledgement** — Five individual legal checkboxes must be independently affirmed before submission. Bulk "agree to all" is not offered; each obligation requires explicit, informed consent.
+- **Digital signature capture** — Signatures are collected via an HTML5 canvas element supporting both mouse and touch input. The captured signature image is stored as an immutable artifact linked to the signing event.
+- **Device fingerprinting at signing** — Every waiver execution records the signer's IP address, browser and operating system identifiers, and an ISO 8601 timestamp. This evidence chain supports legal enforceability and dispute resolution.
+- **Enforced completion gate** — The RSVP submission control remains disabled until all legal requirements are satisfied. There is no client-side bypass path; server-side validation independently verifies completeness before accepting the registration.
+- **Waiver expiration** — Signed waivers are valid for one year from the signing date. Expired waivers must be re-executed before participating in subsequent events.
+- **Emergency contact collection** — Outdoor adventure RSVPs require emergency contact information. This data is collected as part of the waiver flow and is accessible only to event organizers and administrators.
+- **Photo/video release with opt-out** — The release grants usage rights for community promotion. Members may revoke consent via written request, triggering a 30-day removal window for previously published media.
+- **Immutable signing audit trail** — Waiver signing events are recorded in the append-only audit log with actor identity, device fingerprint, and document version. These records cannot be modified or deleted after creation.
+
 ## Infrastructure
 
 - **Server-side rendering** — HTML is rendered on the server. There is no client-side JavaScript framework, eliminating entire classes of XSS, CSRF token leakage, and DOM manipulation vulnerabilities common in single-page applications.

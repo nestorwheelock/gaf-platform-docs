@@ -44,10 +44,10 @@ Calendar event management, RSVP with capacity enforcement, recurring series supp
   - [x] Secured OAuth cookie handling
 - [x] 18 integration tests
 
-## Phase 4: Frontend
-**Status:** In Progress
+## Phase 4: Frontend / SSR
+**Status:** In Progress (significant progress)
 
-Server-side rendered pages with the "floating glass over photography" visual theme.
+Server-side rendered pages with the "floating glass over photography" visual theme. 32 HTML mockup pages complete with full design system, all page templates built, and interactive elements working (signature pad, accept-all, disabled-until-complete buttons).
 
 - [x] Landing page with hero section
 - [x] Listing browse page (category tabs, search, pagination)
@@ -55,38 +55,48 @@ Server-side rendered pages with the "floating glass over photography" visual the
 - [x] Post listing form
 - [x] Admin dashboard with sidebar layout
 - [x] Admin moderation queue UI
-- [ ] Messages page
-- [ ] Events calendar page
-- [ ] Mobile responsive refinement
+- [x] Messages page
+- [x] Events calendar page
+- [x] Mobile responsive refinement
+- [x] 32 HTML mockup pages with full design system
+- [x] All page templates built
+- [x] Interactive elements (signature pad, accept-all, disabled-until-complete buttons)
 
 ## Phase 5: WordPress Migration
-**Status:** Planned
+**Status:** Mockups Complete, Ready for Implementation
 
-Full replacement of the existing WordPress site. Broken into five sprints.
+Full replacement of the existing WordPress site. Broken into five sprints. All sprints now have approved mockups and wireframes ready for backend integration and implementation.
 
-### 5A: Theme & Layout
-Visual implementation of the GAF brand design system.
+### 5A: Theme & Layout (Sprint 1)
+Design system complete — `gaf-theme.css` with full color palette, frosted glass effects, typography scale, 20-photo background slideshow with crossfade transitions, and responsive nav/footer.
 
-- [ ] Floating glass CSS system over adventure photography
-- [ ] GAF color palette (ocean teal, sunset orange, golden amber)
-- [ ] Background image rotation with photographer credits
-- [ ] Scroll-based reveal effects
-- [ ] Mobile responsive layout
-- [ ] 9 curated adventure background images (WebP)
+- [x] Floating glass CSS system over adventure photography
+- [x] GAF color palette (ocean teal, sunset orange, golden amber)
+- [x] Full `gaf-theme.css` design system with frosted glass and typography
+- [x] 20-photo background slideshow with crossfade transitions
+- [x] Photographer credits via bg-reveal section
+- [x] Scroll-based reveal effects (nav/footer fade)
+- [x] Mobile responsive layout
+- [ ] WebP optimization pipeline for background images
 
-### 5B: CMS & Content Pages
-Block-based content management for static pages.
+### 5B: CMS & Content Pages (Sprint 2)
+Home, About, Join, and Contact pages mockup'd with real GAF content and brand photography.
 
-- [ ] CMS page and block infrastructure
-- [ ] Page templates: Home, About, Join, Contact
+- [x] Page templates: Home, About, Join, Contact (mockups with real content)
+- [ ] CMS page and block infrastructure (backend)
 - [ ] Block types: hero, rich text, image gallery, CTA, embed
 - [ ] Asset management with WebP variant generation
 - [ ] Admin page editor
 - [ ] WordPress content import
 
-### 5C: Adventures as Encounters
-Upgrade events to the full encounter lifecycle model.
+### 5C: Adventures as Encounters (Sprint 3)
+Events list, event detail, RSVP + waiver flow complete with capacity bars, attendee lists, and emergency contact collection.
 
+- [x] Events list page mockup
+- [x] Event detail page mockup
+- [x] RSVP + waiver flow with capacity progress bars
+- [x] Attendee list display
+- [x] Emergency contact collection
 - [ ] 14 adventure types (hiking, kayaking, sailing, snorkeling, diving, whale watching, camping, off-roading, national parks, surfing, water sports, social, holiday, travel)
 - [ ] Encounter lifecycle: Scheduled → Active → Completed → Cancelled
 - [ ] Attendance roster with check-in tracking
@@ -94,22 +104,29 @@ Upgrade events to the full encounter lifecycle model.
 - [ ] iCal export and Google Calendar subscription
 - [ ] WordPress event history import
 
-### 5D: Membership & Payments
-Replace WeTravel with integrated Stripe billing.
+### 5D: Membership & Payments (Sprint 4)
+4-tier comparison page, Stripe checkout mockup, and admin subscriber dashboard with MRR, churn, and revenue-by-tier metrics.
 
-- [ ] Four tiers: Basic (free), Supporter ($29/yr), Frequent Flyer ($59/yr), Gold Star ($180/yr)
-- [ ] Stripe subscription management
+- [x] Four-tier comparison page mockup
+- [x] Stripe checkout flow mockup
+- [x] Admin subscriber dashboard mockup (MRR, churn, revenue-by-tier)
+- [ ] Stripe subscription management (backend)
 - [ ] Variable one-time donations
 - [ ] Webhook-driven payment sync
 - [ ] Tier-based event access gating
-- [ ] Join flow with tier comparison and checkout
+- [ ] Join flow backend integration
 
-### 5E: Liability Waivers
-Adventure liability management.
+### 5E: Liability Waivers (Sprint 5)
+Full liability waiver, image release, and photo/video release with digital signature capture, legal checkboxes, and device fingerprinting.
 
-- [ ] Waiver creation at RSVP time
+- [x] Liability waiver mockup with legal checkboxes
+- [x] Image release waiver mockup
+- [x] Photo/video release waiver mockup
+- [x] Digital signature pad (canvas-based capture)
+- [x] Device fingerprinting for signature verification
+- [x] Accept-all and disabled-until-complete button patterns
+- [ ] Waiver creation at RSVP time (backend)
 - [ ] Public token-based signing (no auth required)
-- [ ] Signature capture with device fingerprinting
 - [ ] Annual renewal tracking
 - [ ] Check-in enforcement for unsigned waivers
 - [ ] Admin waiver management

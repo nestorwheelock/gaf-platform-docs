@@ -1,6 +1,6 @@
 # API Contract
 
-The GAF platform exposes 50 endpoints organized by access level. All routes are served over HTTPS. API routes return JSON; page routes return server-rendered HTML.
+The GAF platform exposes 65 endpoints organized by access level. All routes are served over HTTPS. API routes return JSON; page routes return server-rendered HTML.
 
 ## Authentication Model
 
@@ -75,8 +75,15 @@ Requires authenticated session (any role).
 |--------|------|-------------|
 | GET | `/api/events` | List upcoming events |
 | GET | `/api/events/:id` | Get event details with RSVP status |
-| POST | `/api/events/:id/rsvp` | RSVP to event |
-| DELETE | `/api/events/:id/rsvp` | Cancel RSVP |
+| POST | `/api/events/{id}/rsvp` | Submit RSVP with waiver signature and emergency contact |
+| DELETE | `/api/events/{id}/rsvp` | Cancel RSVP |
+
+### Waivers
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/waivers/current` | Get current active waiver status |
+| POST | `/api/waivers/sign` | Sign liability waiver with digital signature |
 
 ### Notifications
 
@@ -123,6 +130,15 @@ Requires Owner or Admin role.
 |--------|------|-------------|
 | GET | `/api/admin/audit` | Get audit log |
 
+### Subscribers
+
+| Method | Path | Description |
+|--------|------|-------------|
+| GET | `/api/admin/subscribers` | List all subscribers with tier and billing info |
+| GET | `/api/admin/subscribers/stats` | Revenue stats (MRR, churn, net growth) |
+| PATCH | `/api/admin/subscribers/{id}` | Update subscriber tier or status |
+| DELETE | `/api/admin/subscribers/{id}` | Cancel subscription |
+
 ## Admin Pages
 
 Server-rendered admin interface. Requires Owner or Admin role.
@@ -130,13 +146,17 @@ Server-rendered admin interface. Requires Owner or Admin role.
 | Method | Path | Description |
 |--------|------|-------------|
 | GET | `/admin` | Dashboard with stats and recent activity |
+| GET | `/admin/members` | Member management page |
+| GET | `/admin/events` | Event management page |
+| GET | `/admin/community` | Community/listings moderation page |
+| GET | `/admin/subscribers` | Subscriber revenue dashboard |
+| GET | `/admin/audit` | Audit log viewer |
+| GET | `/admin/settings` | Platform settings |
 | GET | `/admin/listings` | Listings management with status filter |
 | POST | `/admin/listings/:id/approve` | Approve listing (form) |
 | POST | `/admin/listings/:id/reject` | Reject listing (form) |
 | POST | `/admin/listings/:id/suspend` | Suspend listing (form) |
-| GET | `/admin/members` | Member management |
 | POST | `/admin/members/:id/role` | Change role (form) |
-| GET | `/admin/audit` | Audit log viewer |
 
 ## Route Summary
 
@@ -144,7 +164,7 @@ Server-rendered admin interface. Requires Owner or Admin role.
 |-------|-------|
 | Public | 6 |
 | Auth | 5 |
-| Member API | 20 |
-| Admin API | 13 |
-| Admin Pages | 8 |
-| **Total** | **52** |
+| Member API | 24 |
+| Admin API | 18 |
+| Admin Pages | 12 |
+| **Total** | **65** |
