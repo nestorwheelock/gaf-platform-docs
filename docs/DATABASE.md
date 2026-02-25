@@ -2,9 +2,11 @@
 
 The GAF platform uses PostgreSQL with 24 tables organized across 10 domains. The schema is designed around shared domain primitives — reusable models for identity, authorization, communication, scheduling, and capacity management.
 
-## Entity-Relationship Diagram
+## Entity-Relationship Diagrams
 
-> The diagram below shows key business columns per table. All tables include standard `id` (UUID PK), `created_at`, and `updated_at` timestamps. Tables with soft delete also carry a `deleted_at` column. Full column details are described in the domain narratives below.
+> Diagrams show key business columns. All tables include `id` (UUID PK), `created_at`, `updated_at` timestamps, and most carry `deleted_at` for soft delete.
+
+### Identity & Access
 
 ```mermaid
 erDiagram
@@ -58,13 +60,19 @@ erDiagram
         enum status
         boolean is_trusted
     }
-    taxonomy_terms {
-        uuid id PK
-        uuid tenant_id FK
-        uuid parent_id FK
-        varchar name
-        varchar slug UK
-    }
+
+    users ||--o| persons : "has profile"
+    users ||--o{ sessions : "has sessions"
+    users ||--o{ tenant_members : "belongs to"
+    tenants ||--o{ tenant_members : "has members"
+    persons ||--o{ party_relationships : "from"
+    persons ||--o{ party_relationships : "to"
+```
+
+### Content & Communication
+
+```mermaid
+erDiagram
     directory_listings {
         uuid id PK
         uuid tenant_id FK
@@ -77,7 +85,6 @@ erDiagram
     }
     stored_files {
         uuid id PK
-        varchar path
         varchar original_filename
         varchar content_type
         bigint size_bytes
@@ -98,6 +105,13 @@ erDiagram
         uuid listing_id FK
         uuid keyword_id FK
     }
+    taxonomy_terms {
+        uuid id PK
+        uuid tenant_id FK
+        uuid parent_id FK
+        varchar name
+        varchar slug UK
+    }
     conversations {
         uuid id PK
         uuid tenant_id FK
@@ -108,8 +122,6 @@ erDiagram
     chat_messages {
         uuid id PK
         uuid conversation_id FK
-        varchar from_address
-        varchar to_address
         text body_text
         varchar direction
     }
@@ -120,15 +132,26 @@ erDiagram
         varchar event_type
         varchar title
         varchar channel
-        varchar status
     }
     notification_preferences {
         uuid id PK
         uuid party_id FK
-        uuid tenant_id FK
         varchar channel
         boolean enabled
     }
+
+    directory_listings ||--o{ listing_photos : "has photos"
+    directory_listings ||--o{ listing_keywords : "tagged with"
+    stored_files ||--o{ listing_photos : "stores"
+    keywords ||--o{ listing_keywords : "applied to"
+    taxonomy_terms ||--o{ taxonomy_terms : "parent of"
+    conversations ||--o{ chat_messages : "contains"
+```
+
+### Events, Capacity & Operations
+
+```mermaid
+erDiagram
     calendar_events {
         uuid id PK
         uuid tenant_id FK
@@ -147,8 +170,6 @@ erDiagram
         varchar status
         timestamp scheduled_start
         timestamp scheduled_end
-        varchar related_type
-        uuid related_id
     }
     encounter_participants {
         uuid id PK
@@ -162,8 +183,6 @@ erDiagram
         varchar name
         int total_capacity
         int available
-        varchar related_type
-        uuid related_id
     }
     holds {
         uuid id PK
@@ -198,43 +217,11 @@ erDiagram
         int max_attempts
     }
 
-    users ||--o| persons : "has profile"
-    users ||--o{ sessions : "has sessions"
-    users ||--o{ tenant_members : "belongs to"
-
-    persons ||--o{ directory_listings : "creates"
-    persons ||--o{ party_relationships : "from"
-    persons ||--o{ party_relationships : "to"
-    persons ||--o{ calendar_events : "organizes"
-    persons ||--o{ encounter_participants : "participates"
-    persons ||--o{ notifications : "receives"
-    persons ||--o{ notification_preferences : "configures"
-
-    tenants ||--o{ tenant_members : "has members"
-    tenants ||--o{ taxonomy_terms : "categorizes"
-    tenants ||--o{ directory_listings : "contains"
-    tenants ||--o{ conversations : "scopes"
-    tenants ||--o{ notifications : "scopes"
-    tenants ||--o{ calendar_events : "schedules"
-    tenants ||--o{ encounters : "tracks"
-    tenants ||--o{ keywords : "defines"
-
-    directory_listings ||--o{ listing_photos : "has photos"
-    directory_listings ||--o{ listing_keywords : "tagged with"
-    stored_files ||--o{ listing_photos : "stores"
-    keywords ||--o{ listing_keywords : "applied to"
-
-    conversations ||--o{ chat_messages : "contains"
-
     encounters ||--o{ encounter_participants : "has participants"
     encounters ||--o| capacity_pools : "manages capacity"
-
     capacity_pools ||--o{ holds : "has holds"
     capacity_pools ||--o{ reservations : "has reservations"
     holds ||--o| reservations : "converts to"
-
-    taxonomy_terms ||--o{ taxonomy_terms : "parent of"
-    users ||--o{ audit_logs : "performed by"
 ```
 
 ## Domain Narrative
